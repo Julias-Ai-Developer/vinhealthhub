@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Venice Health | Premium Medicine Uganda</title>
+  <!-- Google Fonts & simple CSS reset -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #fafef9;
+      color: #1a2e1f;
+      scroll-behavior: smooth;
+      line-height: 1.5;
+    }
+
+    /* Color palette: medical trust (deep teal, rich blue, crisp white, earthy accents) */
+    :root {
+      --primary-dark: #0B3B2F;
+      --primary-medium: #1A6D4C;
+      --primary-light: #EAF7F0;
+      --accent-blue: #2C6E9E;
+      --accent-gold: #C9A03D;
+      --gray-light: #F4F9F4;
+      --gray-border: #DDEBE0;
+      --text-dark: #1E2A21;
+      --text-muted: #4A5B4E;
+      --white: #ffffff;
+      --shadow-sm: 0 8px 20px rgba(0, 32, 16, 0.06);
+      --shadow-md: 0 12px 28px rgba(0, 32, 16, 0.08);
+      --transition: all 0.25s ease;
+    }
+
+    /* base */
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Header / Navigation */
+    header {
+      background: var(--white);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.03);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(0px);
+      border-bottom: 1px solid var(--gray-border);
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+      flex-wrap: wrap;
+    }
+
+    .logo h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-medium) 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .logo span {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--primary-medium);
+      display: block;
+      letter-spacing: 0.3px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      font-weight: 500;
+      color: var(--text-dark);
+      transition: var(--transition);
+      border-bottom: 2px solid transparent;
+      padding: 0.25rem 0;
+    }
+
+    .nav-links a.active, .nav-links a:hover {
+      color: var(--primary-medium);
+      border-bottom-color: var(--primary-medium);
+    }
+
+    /* page containers */
+    .page {
+      display: none;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .active-page {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+
+    /* Hero section */
+    .hero {
+      background: linear-gradient(120deg, var(--primary-light) 0%, #ffffff 80%);
+      border-radius: 2rem;
+      margin: 2rem 0 2rem 0;
+      padding: 3rem 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .hero-content {
+      flex: 1;
+    }
+
+    .hero-content h2 {
+      font-size: 2.7rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      line-height: 1.2;
+    }
+
+    .hero-content p {
+      margin: 1rem 0 1.5rem;
+      color: var(--text-muted);
+      font-size: 1.1rem;
+    }
+
+    .hero-img {
+      flex: 1;
+      background: url('https://placehold.co/600x400/EBF5F0/1A6D4C?text=Venice+Health+Wellness') center/cover no-repeat;
+      min-height: 260px;
+      border-radius: 1.5rem;
+      background-size: cover;
+      background-image: url('https://images.unsplash.com/photo-1579154204601-0153f3512d2e?w=600&auto=format');
+      background-position: center;
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* section cards */
+    .section-title {
+      font-size: 2rem;
+      font-weight: 600;
+      margin: 2.5rem 0 1.5rem 0;
+      color: var(--primary-dark);
+      position: relative;
+      display: inline-block;
+    }
+    .section-title:after {
+      content: '';
+      width: 60px;
+      height: 3px;
+      background: var(--accent-gold);
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      border-radius: 4px;
+    }
+
+    .disease-grid, .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.8rem;
+      margin: 2rem 0;
+    }
+
+    .card {
+      background: var(--white);
+      border-radius: 1.5rem;
+      padding: 1.5rem;
+      transition: var(--transition);
+      border: 1px solid var(--gray-border);
+      box-shadow: var(--shadow-sm);
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--primary-light);
+    }
+    .card i {
+      font-size: 2.2rem;
+      color: var(--primary-medium);
+      margin-bottom: 1rem;
+    }
+    .card h3 {
+      font-size: 1.35rem;
+      margin-bottom: 0.5rem;
+    }
+    .badge-usa {
+      background: #eef2fa;
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 40px;
+      margin-top: 0.6rem;
+      color: var(--accent-blue);
+      font-weight: 600;
+    }
+
+    /* shop product */
+    .product-card {
+      background: var(--white);
+      border-radius: 1.2rem;
+      overflow: hidden;
+      border: 1px solid var(--gray-border);
+      transition: var(--transition);
+    }
+    .product-info {
+      padding: 1.2rem;
+    }
+    .product-title {
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+    .product-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin: 0.5rem 0;
+    }
+    .price {
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin: 0.5rem 0;
+    }
+    .btn-buy {
+      background: var(--primary-dark);
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 60px;
+      font-weight: 500;
+      cursor: pointer;
+      width: 100%;
+      transition: 0.2s;
+      font-family: inherit;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .btn-buy:hover {
+      background: var(--primary-medium);
+    }
+
+    /* contact form */
+    .contact-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+    .contact-form, .contact-info {
+      flex: 1;
+      background: white;
+      padding: 2rem;
+      border-radius: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--gray-border);
+    }
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border: 1px solid var(--gray-border);
+      border-radius: 1rem;
+      font-family: inherit;
+      transition: 0.2s;
+    }
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--primary-medium);
+      box-shadow: 0 0 0 2px rgba(26,109,76,0.1);
+    }
+    .btn-primary {
+      background: var(--primary-medium);
+      color: white;
+      border: none;
+      padding: 0.8rem 1.6rem;
+      border-radius: 2rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* footer */
+    footer {
+      background: var(--primary-dark);
+      color: #d9e3db;
+      margin-top: 4rem;
+      padding: 2rem 0 1rem;
+      border-radius: 2rem 2rem 0 0;
+    }
+    .footer-content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+    .footer-col h4 {
+      color: white;
+      margin-bottom: 1rem;
+    }
+    .footer-col p, .footer-col a {
+      font-size: 0.9rem;
+      color: #cbdcd0;
+    }
+
+    /* responsive */
+    @media (max-width: 780px) {
+      .navbar {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .nav-links {
+        gap: 1.2rem;
+      }
+      .hero-content h2 {
+        font-size: 2rem;
+      }
+      .container {
+        padding: 0 18px;
+      }
+    }
+
+    /* cart / checkout modal? but we use direct WhatsApp */
+    .whatsapp-redirect {
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="navbar">
+      <div class="logo">
+        <h1>Venice Health</h1>
+        <span>American medicines · Trusted in Uganda</span>
+      </div>
+      <div class="nav-links">
+        <a href="#" data-page="home" class="nav-link active">Home</a>
+        <a href="#" data-page="shop" class="nav-link">Shop / Get Meds</a>
+        <a href="#" data-page="contact" class="nav-link">Contact Us</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <!-- ========================= HOME PAGE ========================= -->
+  <div id="home-page" class="page active-page">
+    <div class="hero">
+      <div class="hero-content">
+        <h2>Quality American Medicines <br>Delivered to Uganda</h2>
+        <p>Venice Health brings you premium pharmaceutical solutions for chronic diseases, hormone imbalances, allergies and more. Sourced from USA, trusted by Ugandan communities.</p>
+        <a href="#" data-page="shop" class="btn-primary" style="display: inline-block; text-decoration: none;">Explore our range →</a>
+      </div>
+      <div class="hero-img"></div>
+    </div>
+
+    <div>
+      <h2 class="section-title">Conditions we treat</h2>
+      <div class="disease-grid">
+        <div class="card"><i class="fas fa-brain"></i><h3>ALS (Amyotrophic Lateral Sclerosis)</h3><p>Innovative supportive therapies to manage symptoms.</p><div class="badge-usa">Made in USA</div></div>
+        <div class="card"><i class="fas fa-tint"></i><h3>Diabetes</h3><p>Advanced glucose management & insulin sensitizers.</p><div class="badge-usa">Made in USA</div></div>
+        <div class="card"><i class="fas fa-heartbeat"></i><h3>Hypertension</h3><p>Cardiovascular support & BP regulation.</p><div class="badge-usa">Made in USA</div></div>
+        <div class="card"><i class="fas fa-lungs"></i><h3>Asthma & Allergies</h3><p>Respiratory relief and anti-allergy protocols.</p><div class="badge-usa">Made in USA</div></div>
+        <div class="card"><i class="fas fa-female"></i><h3>Hormone Imbalance (Women)</h3><p>Estrogen/progesterone support, PCOS & menopause care.</p><div class="badge-usa">Made in USA</div></div>
+        <div class="card"><i class="fas fa-kidneys"></i><h3>Kidney Care</h3><p>Nephroprotective & renal function formulas.</p><div class="badge-usa">Made in USA</div></div>
+        <div class="card"><i class="fas fa-allergies"></i><h3>Other Chronic Ailments</h3><p>Personalized medical kits available on request.</p><div class="badge-usa">USA origin</div></div>
+      </div>
+    </div>
+
+    <div style="background: var(--primary-light); padding: 2rem; border-radius: 1.5rem; margin: 2rem 0;">
+      <h3 style="color: var(--primary-dark);">📍 Located in Uganda — One day delivery within major cities (2hrs express in Kampala)</h3>
+      <p>Venice Health is proudly serving Ugandans with authentic American medicines. Our warehouse is central for fast dispatch. Reach out for any consultation.</p>
+    </div>
+  </div>
+
+  <!-- ========================= SHOP PAGE ========================= -->
+  <div id="shop-page" class="page">
+    <h2 class="section-title">🛒 Our Medicines – Order with Ease</h2>
+    <p style="margin-bottom: 1rem;">Browse our catalog of American-grade medicine. Click "Order via WhatsApp" → complete checkout → you'll be redirected to WhatsApp with your selected product details.</p>
+    
+    <div class="product-grid" id="product-list">
+      <!-- products will be injected via js, but we populate static for clarity -->
+    </div>
+    <div id="cart-message" style="margin: 1rem 0;"></div>
+  </div>
+
+  <!-- ========================= CONTACT PAGE ========================= -->
+  <div id="contact-page" class="page">
+    <h2 class="section-title">📞 Reach Venice Health</h2>
+    <div class="contact-grid">
+      <div class="contact-form">
+        <h3>Send us a message</h3>
+        <form id="contactForm">
+          <div class="form-group"><input type="text" placeholder="Full name" id="contactName" required></div>
+          <div class="form-group"><input type="email" placeholder="Email address" id="contactEmail" required></div>
+          <div class="form-group"><input type="tel" placeholder="Phone (Uganda)" id="contactPhone"></div>
+          <div class="form-group"><textarea rows="4" placeholder="Your inquiry about medicines..." id="contactMsg"></textarea></div>
+          <button type="submit" class="btn-primary">Send Message <i class="fab fa-whatsapp"></i></button>
+          <p style="font-size:0.8rem; margin-top: 12px;">We reply via WhatsApp or email within hours.</p>
+        </form>
+      </div>
+      <div class="contact-info">
+        <h3>Visit or reach us</h3>
+        <p><i class="fas fa-map-marker-alt"></i> Kampala, Uganda — Central District, 2nd Floor, Medical Plaza</p>
+        <p><i class="fas fa-phone-alt"></i> +256 700 123 456 (WhatsApp & Calls)</p>
+        <p><i class="far fa-clock"></i> Mon–Sat: 9am – 6pm (Express delivery 2hrs within city)</p>
+        <p><i class="fas fa-shipping-fast"></i> Nationwide delivery: 1-2 days. All medicines sourced from USA.</p>
+        <hr style="margin: 1rem 0; border-color: var(--gray-border);">
+        <p><strong>Emergency assistance?</strong> Chat directly with our pharmacist on WhatsApp.</p>
+        <a href="#" id="directWhatsappContact" class="btn-primary" style="display: inline-block; background: #25D366; margin-top: 1rem;"><i class="fab fa-whatsapp"></i> Chat now</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-col"><h4>Venice Health</h4><p>Authentic American medicines, delivered across Uganda. Trust, quality & care.</p></div>
+      <div class="footer-col"><h4>Quick links</h4><p><a href="#" data-page="home">Home</a> | <a href="#" data-page="shop">Shop</a> | <a href="#" data-page="contact">Contact</a></p></div>
+      <div class="footer-col"><h4>Contact</h4><p><i class="fab fa-whatsapp"></i> +256 700 123 456</p><p>Email: care@venicehealth.ug</p></div>
+      <div class="footer-col"><h4>Follow us</h4><p><i class="fab fa-facebook"></i> <i class="fab fa-instagram"></i> <i class="fab fa-twitter"></i> Venice Health Uganda</p></div>
+    </div>
+    <p style="text-align: center; margin-top: 2rem; font-size: 0.8rem;">© 2025 Venice Health — American medicine trusted in Uganda. Always consult a physician.</p>
+  </div>
+</footer>
+
+<script>
+  // ---------- PRODUCT DATABASE (made in USA medicines) ----------
+  const products = [
+    { id: 1, name: "GlucoBalance (Diabetes)", desc: "Advanced glycemic control, 30 tablets, USA", price: "UGX 85,000", disease: "diabetes" },
+    { id: 2, name: "NeuroCare ALS Support", desc: "Neuroprotective formula, 60 capsules", price: "UGX 210,000", disease: "als" },
+    { id: 3, name: "CardioStab (Hypertension)", desc: "BP regulation, 28 tablets", price: "UGX 72,000", disease: "hypertension" },
+    { id: 4, name: "RespiFree (Asthma/Allergy)", desc: "Anti-inflammatory + bronchodilator support", price: "UGX 98,000", disease: "asthma" },
+    { id: 5, name: "FemHarmony (Hormone Imbalance)", desc: "Women’s hormonal balance, natural adaptogens", price: "UGX 112,000", disease: "hormone" },
+    { id: 6, name: "RenalCleanse (Kidney Health)", desc: "Supports kidney filtration, 60 veg caps", price: "UGX 134,000", disease: "kidney" },
+    { id: 7, name: "Aller-Ease (Severe Allergies)", desc: "Antihistamine + immune support, 30 tablets", price: "UGX 64,000", disease: "allergy" },
+    { id: 8, name: "Venice Multi-Vital", desc: "Multivitamin for chronic illness recovery", price: "UGX 55,000", disease: "general" }
+  ];
+
+  const WHATSAPP_NUMBER = "256700123456";  // Uganda format without + but we will format
+  // function to generate whatsapp link with product details
+  function getWhatsappLink(product, userCustomMsg = "") {
+    let message = `Hello Venice Health, I would like to order: *${product.name}* (${product.desc}) - Price: ${product.price}.`;
+    if (userCustomMsg) message += ` Additional info: ${userCustomMsg}`;
+    message += ` Please confirm availability and delivery to Kampala/Uganda. Thanks!`;
+    const encodedMsg = encodeURIComponent(message);
+    return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMsg}`;
+  }
+
+  // Render shop products dynamically
+  function renderShop() {
+    const productGrid = document.getElementById('product-list');
+    if (!productGrid) return;
+    productGrid.innerHTML = '';
+    products.forEach(prod => {
+      const productDiv = document.createElement('div');
+      productDiv.className = 'product-card';
+      productDiv.innerHTML = `
+        <div class="product-info">
+          <div class="product-title">${prod.name}</div>
+          <div class="product-desc">${prod.desc}</div>
+          <div class="price">${prod.price}</div>
+          <div class="badge-usa" style="margin: 5px 0;">🇺🇸 Made in USA</div>
+          <button class="btn-buy" data-id="${prod.id}" data-name="${prod.name.replace(/[^a-zA-Z0-9 ]/g, '')}" data-price="${prod.price}" data-desc="${prod.desc}">
+            <i class="fab fa-whatsapp"></i> Order via WhatsApp
+          </button>
+        </div>
+      `;
+      productGrid.appendChild(productDiv);
+    });
+
+    // attach event listeners to all order buttons
+    document.querySelectorAll('.btn-buy').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const id = btn.getAttribute('data-id');
+        const name = btn.getAttribute('data-name');
+        const price = btn.getAttribute('data-price');
+        const desc = btn.getAttribute('data-desc');
+        const product = { name, desc, price, id };
+        // optional: ask for any extra notes? We can prompt if needed to mimic filled cart content
+        let extra = prompt("Any special notes? (dosage, delivery location, etc.) \nClick OK to proceed to WhatsApp with product details.", "Delivery in Kampala");
+        if (extra !== null) {
+          const whatsLink = getWhatsappLink(product, extra);
+          window.open(whatsLink, '_blank');
+        } else {
+          // just with default message if cancel
+          const whatsLink = getWhatsappLink(product, "");
+          window.open(whatsLink, '_blank');
+        }
+      });
+    });
+  }
+
+  // Contact form: message goes to whatsapp + email-style (but we also can redirect to whatsapp with the message content)
+  const contactForm = document.getElementById('contactForm');
+  if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('contactName').value.trim();
+      const email = document.getElementById('contactEmail').value.trim();
+      const phone = document.getElementById('contactPhone').value.trim();
+      const msg = document.getElementById('contactMsg').value.trim();
+      if (!name || !email) {
+        alert("Please enter name and email");
+        return;
+      }
+      const fullMsg = `*New inquiry from Venice Health website*%0A👤 Name: ${name}%0A📧 Email: ${email}%0A📞 Phone: ${phone}%0A💬 Message: ${msg}`;
+      const waLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${fullMsg}`;
+      window.open(waLink, '_blank');
+      contactForm.reset();
+      alert("Thank you! You will be redirected to WhatsApp to complete your message.");
+    });
+  }
+
+  // direct whatsapp contact button
+  const directWA = document.getElementById('directWhatsappContact');
+  if(directWA){
+    directWA.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=Hello%20Venice%20Health%2C%20I%20need%20assistance%20regarding%20medicines.`, '_blank');
+    });
+  }
+
+  // ----- page navigation (SPA style) -----
+  const pages = {
+    home: document.getElementById('home-page'),
+    shop: document.getElementById('shop-page'),
+    contact: document.getElementById('contact-page')
+  };
+
+  function showPage(pageId) {
+    Object.keys(pages).forEach(id => {
+      pages[id].classList.remove('active-page');
+    });
+    pages[pageId].classList.add('active-page');
+    // update active class on nav links
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.classList.remove('active');
+      if(link.getAttribute('data-page') === pageId) {
+        link.classList.add('active');
+      }
+    });
+    // additional: if shop page is opened, ensure products rendered once
+    if(pageId === 'shop' && typeof renderShop === 'function') {
+      // re-render to avoid duplication but safe call
+      if(document.getElementById('product-list').children.length === 0) renderShop();
+    }
+  }
+
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const page = link.getAttribute('data-page');
+      if(page && pages[page]) showPage(page);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+  // initial render for shop (so products visible)
+  renderShop();
+
+  // also handle footer data-page links for smooth nav
+  document.querySelectorAll('a[data-page]').forEach(el => {
+    if(!el.classList.contains('nav-link')) {
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+        const pg = el.getAttribute('data-page');
+        if(pg && pages[pg]) showPage(pg);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+  });
+
+  // extra safety: ensure contact direct whatsapp also responds
+  // product checkout: works exactly as "checkout and redirect to WhatsApp with cart content"
+  // also we guarantee that when someone buys, the whatsapp message contains product name & user filled info.
+
+  // make active home page by default
+  showPage('home');
+  
+  // bonus: for global checkout demonstration, we could add a small feature: but it's already per product.
+  console.log("Venice Health — fully responsive & ready with WhatsApp ordering");
+</script>
+</body>
+</html>
