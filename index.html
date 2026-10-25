@@ -6,6 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#0b3d22">
   <title>VINZ Health Hub | Medicines, Wellness & Appointments</title>
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="images/logo/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="images/logo/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/logo/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -1995,6 +1999,177 @@
       font-size: 0.92rem;
     }
 
+    /* ---------- Flyers ---------- */
+    .flyer-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .flyer-card {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border-radius: 28px;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--glass-shadow);
+      transition: var(--transition);
+    }
+
+    .flyer-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+      background: var(--glass-strong);
+    }
+
+    .flyer-thumb {
+      position: relative;
+      aspect-ratio: 4 / 4.35;
+      overflow: hidden;
+      background: linear-gradient(160deg, #f7fdf9, #e1f6ea);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .flyer-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 10px;
+      transition: transform 0.8s var(--ease);
+    }
+
+    .flyer-card:hover .flyer-thumb img {
+      transform: scale(1.04);
+    }
+
+    .flyer-caption {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      flex: 1;
+      padding: 18px 20px 20px;
+    }
+
+    .flyer-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      width: fit-content;
+      color: var(--primary-deep);
+      background: var(--primary-soft);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 0.66rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .flyer-tag.new {
+      color: var(--primary-dark);
+      background: var(--accent-lime);
+      border-color: transparent;
+    }
+
+    .flyer-caption h3 {
+      color: var(--primary-dark);
+      font-size: 1.02rem;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+    }
+
+    .flyer-caption p {
+      color: var(--muted);
+      font-size: 0.84rem;
+      line-height: 1.45;
+    }
+
+    .flyer-open {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-top: auto;
+      padding-top: 8px;
+      color: var(--primary-deep);
+      font-size: 0.8rem;
+      font-weight: 800;
+    }
+
+    .flyer-open i {
+      transition: transform 0.4s var(--spring);
+    }
+
+    .flyer-card:hover .flyer-open i {
+      transform: translate(3px, -3px) scale(1.1);
+    }
+
+    .flyer-cta {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 34px;
+      border-radius: 28px;
+      color: var(--white);
+      background:
+        radial-gradient(90% 80% at 100% 0%, rgba(198, 238, 122, 0.35), transparent 60%),
+        linear-gradient(135deg, #14a05a, #0b6b3c);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      box-shadow: var(--shadow-md), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+      transition: var(--transition);
+    }
+
+    .flyer-cta:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+    }
+
+    .flyer-cta i {
+      width: 54px;
+      height: 54px;
+      display: grid;
+      place-items: center;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      font-size: 1.5rem;
+    }
+
+    .flyer-cta h3 {
+      font-size: 1.4rem;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+
+    .flyer-cta p {
+      color: #d6efe1;
+      font-size: 0.9rem;
+    }
+
+    .flyer-cta .btn {
+      width: 100%;
+      margin-top: 6px;
+    }
+
+    @media (max-width: 991px) {
+      .flyer-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 600px) {
+      .flyer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .flyer-thumb {
+        aspect-ratio: 4 / 4;
+      }
+    }
+
     /* ---------- Contact ---------- */
     .contact-grid {
       display: grid;
@@ -2709,6 +2884,7 @@
             <a href="#services" class="nav-link"><i class="fas fa-heart-pulse"></i> Care</a>
             <a href="#shop" class="nav-link"><i class="fas fa-bag-shopping"></i> Shop</a>
             <a href="#updates" class="nav-link"><i class="fas fa-newspaper"></i> Updates</a>
+            <a href="#flyers" class="nav-link"><i class="fas fa-images"></i> Flyers</a>
             <a href="#contact" class="nav-link"><i class="fas fa-envelope"></i> Contact</a>
             <a href="#appointment" class="nav-link nav-cta"><i class="fas fa-calendar-check"></i> Book appointment</a>
           </nav>
@@ -2986,6 +3162,87 @@
       </div>
     </section>
 
+    <section id="flyers" class="section" style="padding-top: 20px;">
+      <div class="container">
+        <div class="section-header reveal">
+          <div class="eyebrow">Flyers & offers</div>
+          <h2 class="section-title">See what is new at VINZ Health Hub.</h2>
+          <p class="section-copy">Browse our latest product flyers, combo guides and health offers. Tap any flyer to open it
+            full size.</p>
+        </div>
+        <div class="flyer-grid">
+          <a class="flyer-card reveal" href="images/flyer/glucobalance-new.jpeg" target="_blank" rel="noopener">
+            <div class="flyer-thumb">
+              <img src="images/flyer/glucobalance-new.jpeg"
+                alt="GlucoBalance new product flyer with bitter melon benefits" loading="lazy">
+            </div>
+            <div class="flyer-caption">
+              <span class="flyer-tag new">New product</span>
+              <h3>GlucoBalance is here</h3>
+              <p>Bitter melon support for glucose balance, insulin function and daily energy.</p>
+              <span class="flyer-open">Open flyer <i class="fas fa-arrow-up-right-from-square"></i></span>
+            </div>
+          </a>
+          <a class="flyer-card reveal" href="images/flyer/wellness-combo.jpeg" target="_blank" rel="noopener">
+            <div class="flyer-thumb">
+              <img src="images/flyer/wellness-combo.jpeg"
+                alt="VINZ Health Hub wellness combo flyer with Super Omega-3 and GlucoBalance" loading="lazy">
+            </div>
+            <div class="flyer-caption">
+              <span class="flyer-tag">Combo guide</span>
+              <h3>Everyday wellness combo</h3>
+              <p>Super Omega-3, GlucoBalance and daily essentials for overall wellness.</p>
+              <span class="flyer-open">Open flyer <i class="fas fa-arrow-up-right-from-square"></i></span>
+            </div>
+          </a>
+          <a class="flyer-card reveal" href="images/flyer/new-arrivals.jpeg" target="_blank" rel="noopener">
+            <div class="flyer-thumb">
+              <img src="images/flyer/new-arrivals.jpeg"
+                alt="VINZ Health Hub new arrivals flyer showing the full product lineup" loading="lazy">
+            </div>
+            <div class="flyer-caption">
+              <span class="flyer-tag">Now available</span>
+              <h3>New arrivals in stock</h3>
+              <p>Explore the latest Trimtone, Andro-Brew, Femmi-Brew, bone and skin products.</p>
+              <span class="flyer-open">Open flyer <i class="fas fa-arrow-up-right-from-square"></i></span>
+            </div>
+          </a>
+          <a class="flyer-card reveal" href="images/flyer/blood-pressure-combo.jpeg" target="_blank" rel="noopener">
+            <div class="flyer-thumb">
+              <img src="images/flyer/blood-pressure-combo.jpeg"
+                alt="High blood pressure combo flyer with Super Omega-3, Muscle-Bone and Resveratrol" loading="lazy">
+            </div>
+            <div class="flyer-caption">
+              <span class="flyer-tag">Combo guide</span>
+              <h3>High blood pressure combo</h3>
+              <p>A focused blend of Super Omega-3, Muscle-Bone and Resveratrol.</p>
+              <span class="flyer-open">Open flyer <i class="fas fa-arrow-up-right-from-square"></i></span>
+            </div>
+          </a>
+          <a class="flyer-card reveal" href="images/flyer/mens-health.jpeg" target="_blank" rel="noopener">
+            <div class="flyer-thumb">
+              <img src="images/flyer/mens-health.jpeg"
+                alt="Men's sexual health flyer featuring Andro-Brew Cappuccino and Andro-T" loading="lazy">
+            </div>
+            <div class="flyer-caption">
+              <span class="flyer-tag">Men's health</span>
+              <h3>Men's health coverage</h3>
+              <p>Andro-Brew Cappuccino and Andro-T for stamina, drive and vitality.</p>
+              <span class="flyer-open">Open flyer <i class="fas fa-arrow-up-right-from-square"></i></span>
+            </div>
+          </a>
+          <a class="flyer-cta reveal"
+            href="https://wa.me/256750516581?text=Hello%20VINZ%20Health%20Hub%2C%20I%20need%20help%20choosing%20the%20right%20combo."
+            target="_blank" rel="noopener">
+            <i class="fab fa-whatsapp"></i>
+            <h3>Need a custom combo?</h3>
+            <p>Send us your health goal and we will recommend the right products, pricing and delivery plan.</p>
+            <span class="btn btn-secondary">Chat with us</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
     <section id="contact" class="section" style="padding-top: 20px;">
       <div class="container contact-grid">
         <div class="map-panel reveal" aria-label="VINZ Health Hub contact image">
@@ -3037,6 +3294,8 @@
           <a href="#home">Home</a>
           <a href="#services">Care</a>
           <a href="#shop">Shop</a>
+          <a href="#updates">Updates</a>
+          <a href="#flyers">Flyers</a>
           <a href="#appointment">Appointments</a>
           <a href="#contact">Contact</a>
         </nav>
