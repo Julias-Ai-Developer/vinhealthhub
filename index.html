@@ -73,7 +73,7 @@
       width: 100%;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
-      animation: pageIn 0.9s var(--ease) both;
+      animation: pageIn 0.9s var(--ease) backwards;
     }
 
     @keyframes pageIn {
@@ -2652,6 +2652,10 @@
 
       body.menu-open {
         overflow: hidden;
+      }
+
+      body.menu-open .nav-shell {
+        z-index: 240;
       }
 
       body.menu-open .nav-links {
