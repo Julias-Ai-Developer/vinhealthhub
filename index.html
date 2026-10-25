@@ -1,0 +1,3815 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0b3d22">
+  <title>VINZ Health Hub | Medicines, Wellness & Appointments</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary-dark: #062a17;
+      --primary: #0b3d22;
+      --primary-medium: #14a05a;
+      --primary-deep: #0f7a45;
+      --primary-soft: #ecfdf3;
+      --primary-tint: #d7f5e3;
+      --accent-lime: #c6ee7a;
+      --accent-red: #e5484d;
+      --ink: #0f1f16;
+      --muted: #5b6b61;
+      --line: rgba(15, 122, 69, 0.12);
+      --bg: #f2f8f4;
+      --white: #ffffff;
+      --grad: linear-gradient(135deg, #14a05a 0%, #0b6b3c 100%);
+
+      /* glass */
+      --glass: rgba(255, 255, 255, 0.55);
+      --glass-strong: rgba(255, 255, 255, 0.78);
+      --glass-border: rgba(255, 255, 255, 0.75);
+      --glass-dark: rgba(6, 42, 23, 0.38);
+      --blur: blur(22px) saturate(170%);
+      --glass-shadow: 0 8px 32px rgba(6, 42, 23, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.85);
+
+      --shadow-sm: 0 6px 20px rgba(6, 42, 23, 0.07);
+      --shadow-md: 0 22px 50px rgba(6, 42, 23, 0.14);
+      --shadow-lg: 0 34px 80px rgba(6, 42, 23, 0.22);
+      --radius: 26px;
+      --radius-sm: 18px;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --transition: all 0.45s var(--ease);
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      font-family: "Inter", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+      width: 100%;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      animation: pageIn 0.9s var(--ease) both;
+    }
+
+    @keyframes pageIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    button {
+      font-family: inherit;
+    }
+
+    ::selection {
+      background: var(--primary-medium);
+      color: var(--white);
+    }
+
+    /* ---------- Ambient background ---------- */
+    .bg-orbs {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+      pointer-events: none;
+      background:
+        radial-gradient(80% 60% at 10% 0%, rgba(215, 245, 227, 0.9), transparent 60%),
+        radial-gradient(70% 60% at 100% 100%, rgba(198, 238, 122, 0.25), transparent 60%),
+        var(--bg);
+    }
+
+    .bg-orbs span {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(70px);
+      opacity: 0.55;
+      will-change: transform;
+    }
+
+    .bg-orbs span:nth-child(1) {
+      width: 520px;
+      height: 520px;
+      left: -140px;
+      top: 8%;
+      background: #5fd697;
+      animation: floatA 22s ease-in-out infinite;
+    }
+
+    .bg-orbs span:nth-child(2) {
+      width: 460px;
+      height: 460px;
+      right: -120px;
+      top: 38%;
+      background: var(--accent-lime);
+      animation: floatB 26s ease-in-out infinite;
+    }
+
+    .bg-orbs span:nth-child(3) {
+      width: 420px;
+      height: 420px;
+      left: 30%;
+      bottom: -160px;
+      background: #14a05a;
+      opacity: 0.3;
+      animation: floatA 30s ease-in-out infinite reverse;
+    }
+
+    @keyframes floatA {
+
+      0%,
+      100% {
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+
+      50% {
+        transform: translate3d(90px, -70px, 0) scale(1.15);
+      }
+    }
+
+    @keyframes floatB {
+
+      0%,
+      100% {
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+
+      50% {
+        transform: translate3d(-100px, 80px, 0) scale(1.1);
+      }
+    }
+
+    .cursor-glow {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 420px;
+      height: 420px;
+      margin: -210px 0 0 -210px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(20, 160, 90, 0.16), transparent 65%);
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      will-change: transform;
+    }
+
+    .cursor-glow.on {
+      opacity: 1;
+    }
+
+    .scroll-progress {
+      position: fixed;
+      left: 0;
+      top: 0;
+      height: 3px;
+      width: 100%;
+      transform-origin: 0 50%;
+      transform: scaleX(0);
+      background: linear-gradient(90deg, var(--primary-medium), var(--accent-lime));
+      z-index: 300;
+    }
+
+    .container {
+      width: min(1200px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .section {
+      padding: 100px 0;
+      scroll-margin-top: 90px;
+      position: relative;
+    }
+
+    .section-header {
+      max-width: 760px;
+      margin-bottom: 48px;
+    }
+
+    .section-header.center {
+      margin-inline: auto;
+      text-align: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--primary-deep);
+      background: var(--glass);
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--glass-shadow);
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 7px 15px;
+      border-radius: 999px;
+      margin-bottom: 18px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--primary-medium);
+      box-shadow: 0 0 0 0 rgba(20, 160, 90, 0.6);
+      animation: ping 2s infinite;
+    }
+
+    @keyframes ping {
+      70% {
+        box-shadow: 0 0 0 9px rgba(20, 160, 90, 0);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(20, 160, 90, 0);
+      }
+    }
+
+    .section-title {
+      color: var(--primary-dark);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.06;
+      letter-spacing: -0.035em;
+      font-weight: 800;
+      margin-bottom: 14px;
+      text-wrap: balance;
+    }
+
+    .section-copy {
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    /* ---------- Buttons ---------- */
+    .btn {
+      position: relative;
+      overflow: hidden;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 52px;
+      border: 0;
+      border-radius: 999px;
+      padding: 0.85rem 1.6rem;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: var(--transition);
+      white-space: nowrap;
+      isolation: isolate;
+    }
+
+    .btn::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -120%;
+      width: 80%;
+      height: 100%;
+      background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+      transform: skewX(-20deg);
+      transition: left 0.7s var(--ease);
+      z-index: -1;
+    }
+
+    .btn:hover::before {
+      left: 140%;
+    }
+
+    .btn:active {
+      transform: scale(0.97) !important;
+    }
+
+    .btn i {
+      transition: transform 0.4s var(--spring);
+    }
+
+    .btn:hover i {
+      transform: scale(1.2) rotate(-8deg);
+    }
+
+    .btn-primary {
+      background: var(--grad);
+      color: var(--white);
+      box-shadow: 0 14px 30px rgba(20, 160, 90, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 20px 40px rgba(20, 160, 90, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+    }
+
+    .btn-secondary {
+      background: var(--glass-strong);
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
+      color: var(--primary-dark);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--glass-shadow);
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .btn-whatsapp {
+      background: linear-gradient(135deg, #2bd36b, #16a34a);
+      color: var(--white);
+      width: 100%;
+      box-shadow: 0 12px 26px rgba(34, 197, 94, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+    }
+
+    .btn-whatsapp:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 18px 34px rgba(34, 197, 94, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+    }
+
+    .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.55);
+      transform: scale(0);
+      animation: rippleAnim 0.7s ease-out forwards;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    @keyframes rippleAnim {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+
+    /* ---------- Header (floating glass pill) ---------- */
+    .top-strip {
+      background: var(--primary-dark);
+      color: #bfe9d0;
+      font-size: 0.8rem;
+    }
+
+    .top-strip .container {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 8px 0;
+      flex-wrap: wrap;
+    }
+
+    .top-strip i {
+      color: var(--accent-lime);
+      margin-right: 6px;
+    }
+
+    header {
+      position: sticky;
+      top: 12px;
+      z-index: 100;
+      padding: 12px 0 0;
+      margin-bottom: -6px;
+    }
+
+    .nav-shell {
+      position: relative;
+      isolation: isolate;
+      border-radius: 999px;
+      padding: 0 12px 0 14px;
+      transition: var(--transition);
+    }
+
+    /* glass lives on a pseudo-element so the mobile drawer (position:fixed) isn't trapped */
+    .nav-shell::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      border-radius: inherit;
+      background: var(--glass);
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--glass-shadow);
+      transition: var(--transition);
+    }
+
+    header.scrolled .nav-shell::before {
+      background: var(--glass-strong);
+      box-shadow: 0 16px 40px rgba(6, 42, 23, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      padding: 0.55rem 0;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .logo-mark {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      object-fit: contain;
+      background: var(--white);
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.6s var(--spring);
+    }
+
+    .logo:hover .logo-mark {
+      transform: rotate(360deg) scale(1.05);
+    }
+
+    .logo h1 {
+      color: var(--primary-dark);
+      font-size: 1.2rem;
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .logo span {
+      color: var(--primary-deep);
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      margin-top: 4px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .nav-links a.nav-link {
+      position: relative;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 0.6rem 1.05rem;
+      border-radius: 999px;
+      transition: var(--transition);
+    }
+
+    .nav-links a.nav-link:hover {
+      color: var(--primary-deep);
+      background: rgba(255, 255, 255, 0.7);
+    }
+
+    .nav-links a.nav-link.active {
+      color: var(--primary-deep);
+      background: var(--white);
+      box-shadow: 0 6px 16px rgba(6, 42, 23, 0.1);
+    }
+
+    .nav-links .nav-link i {
+      display: none;
+    }
+
+    .nav-links a.nav-cta,
+    .nav-links a.nav-cta.active {
+      background: var(--grad);
+      color: var(--white) !important;
+      margin-left: 8px;
+      padding: 0.7rem 1.3rem;
+      box-shadow: 0 10px 22px rgba(20, 160, 90, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+    }
+
+    .nav-links a.nav-cta:hover {
+      transform: translateY(-2px);
+      background: var(--grad);
+    }
+
+    .menu-toggle {
+      width: 44px;
+      height: 44px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--glass-border);
+      border-radius: 50%;
+      background: var(--glass-strong);
+      cursor: pointer;
+      transition: var(--transition);
+      position: relative;
+      z-index: 250;
+    }
+
+    .hamburger-box {
+      width: 20px;
+      height: 14px;
+      display: inline-block;
+      position: relative;
+    }
+
+    .hamburger-inner {
+      display: block;
+      width: 20px;
+      height: 2px;
+      border-radius: 2px;
+      background: var(--primary-dark);
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      transition: background-color 0.25s ease-in-out;
+    }
+
+    .hamburger-inner::before,
+    .hamburger-inner::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 2px;
+      border-radius: 2px;
+      background: var(--primary-dark);
+      transition: transform 0.25s ease-in-out, top 0.25s ease-in-out, bottom 0.25s ease-in-out;
+    }
+
+    .hamburger-inner::before {
+      top: -6px;
+    }
+
+    .hamburger-inner::after {
+      bottom: -6px;
+    }
+
+    body.menu-open .hamburger-inner {
+      background-color: transparent !important;
+    }
+
+    body.menu-open .hamburger-inner::before {
+      top: 0;
+      transform: rotate(45deg);
+    }
+
+    body.menu-open .hamburger-inner::after {
+      bottom: 0;
+      transform: rotate(-45deg);
+    }
+
+    .mobile-menu-head,
+    .menu-overlay {
+      display: none;
+    }
+
+    /* ---------- Landing (white hero) ---------- */
+    .landing {
+      position: relative;
+      padding: 54px 0 70px;
+    }
+
+    .landing-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 56px;
+      align-items: center;
+    }
+
+    .landing-copy>* {
+      animation: riseIn 0.9s var(--ease) both;
+    }
+
+    .landing-copy>*:nth-child(2) {
+      animation-delay: 0.1s;
+    }
+
+    .landing-copy>*:nth-child(3) {
+      animation-delay: 0.2s;
+    }
+
+    .landing-copy>*:nth-child(4) {
+      animation-delay: 0.3s;
+    }
+
+    @keyframes riseIn {
+      from {
+        opacity: 0;
+        transform: translateY(34px);
+        filter: blur(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+        filter: blur(0);
+      }
+    }
+
+    .landing-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--primary-deep);
+      background: var(--glass-strong);
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--glass-shadow);
+      border-radius: 999px;
+      padding: 9px 18px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      margin-bottom: 24px;
+    }
+
+    .landing-title {
+      color: var(--primary-dark);
+      font-size: clamp(2.4rem, 5.2vw, 4.5rem);
+      line-height: 1.02;
+      letter-spacing: -0.045em;
+      font-weight: 800;
+      margin-bottom: 22px;
+    }
+
+    .type-wrap {
+      display: block;
+      min-height: 2.1em;
+      background: linear-gradient(90deg, #14a05a, #0b6b3c, #7bbf2f, #14a05a);
+      background-size: 300% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: shine 6s linear infinite;
+    }
+
+    @keyframes shine {
+      to {
+        background-position: 300% 0;
+      }
+    }
+
+    .caret {
+      display: inline-block;
+      width: 4px;
+      height: 0.9em;
+      margin-left: 6px;
+      vertical-align: -0.08em;
+      border-radius: 2px;
+      background: var(--primary-medium);
+      animation: blink 0.9s steps(1) infinite;
+    }
+
+    @keyframes blink {
+      50% {
+        opacity: 0;
+      }
+    }
+
+    .landing-copy p {
+      max-width: 540px;
+      color: var(--muted);
+      font-size: 1.1rem;
+      margin-bottom: 32px;
+    }
+
+    .landing-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .landing-spotlight {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 20px;
+      padding: 8px 16px 8px 8px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(198, 238, 122, 0.45), rgba(255, 255, 255, 0.8));
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow-sm);
+      color: var(--primary-dark);
+      font-size: 0.84rem;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .landing-spotlight:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .landing-spotlight-tag {
+      display: inline-grid;
+      place-items: center;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: var(--grad);
+      color: var(--white);
+      font-size: 0.66rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .landing-spotlight i {
+      color: var(--primary-deep);
+      font-size: 0.8rem;
+    }
+
+    .landing-visual {
+      position: relative;
+    }
+
+    .visual-stage {
+      position: relative;
+    }
+
+    .visual-frame {
+      position: relative;
+      aspect-ratio: 4 / 4.3;
+      border-radius: 44px;
+      overflow: hidden;
+      border: 7px solid rgba(255, 255, 255, 0.9);
+      box-shadow: var(--shadow-lg);
+      background: var(--primary-tint);
+      isolation: isolate;
+    }
+
+    .landing-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      background-position: center;
+      background-size: cover;
+      transform: scale(1.12);
+      transition: opacity 1s ease, transform 8s ease-out;
+    }
+
+    .landing-slide.active {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .float-chip {
+      position: absolute;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px 10px 10px;
+      border-radius: 20px;
+      background: var(--glass-strong);
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow-md), inset 0 1px 0 #fff;
+      animation: bob 6s ease-in-out infinite;
+    }
+
+    .float-chip i {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 13px;
+      background: var(--grad);
+      color: var(--white);
+    }
+
+    .float-chip strong {
+      display: block;
+      color: var(--primary-dark);
+      font-size: 1.05rem;
+      line-height: 1;
+      margin-bottom: 3px;
+    }
+
+    .float-chip span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.72rem;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    .chip-a {
+      left: -32px;
+      top: 12%;
+    }
+
+    .chip-b {
+      right: -26px;
+      top: 42%;
+      animation-delay: -2s;
+    }
+
+    .chip-c {
+      left: -14px;
+      bottom: 12%;
+      animation-delay: -4s;
+    }
+
+    @keyframes bob {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-9px);
+      }
+    }
+
+    .landing-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 22px;
+    }
+
+    .landing-dot {
+      width: 26px;
+      height: 6px;
+      border: 0;
+      border-radius: 20px;
+      background: rgba(15, 122, 69, 0.2);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .landing-dot.active {
+      width: 52px;
+      background: var(--grad);
+    }
+
+    @media (max-width: 991px) {
+      .landing {
+        padding: 26px 0 50px;
+      }
+
+      .landing-grid {
+        grid-template-columns: 1fr;
+        gap: 36px;
+      }
+
+      .landing-copy p {
+        font-size: 1rem;
+      }
+
+      .type-wrap {
+        min-height: 2.15em;
+      }
+
+      .visual-frame {
+        aspect-ratio: 4 / 3.3;
+        border-radius: 32px;
+        border-width: 5px;
+      }
+
+      .chip-a {
+        left: 10px;
+        top: 12px;
+      }
+
+      .chip-b {
+        right: 10px;
+        top: auto;
+        bottom: 12px;
+      }
+
+      .chip-c {
+        display: none;
+      }
+
+      .float-chip {
+        padding: 8px 12px 8px 8px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .landing-actions .btn {
+        width: 100%;
+      }
+    }
+
+    /* ---------- Featured product ---------- */
+    .featured-product {
+      padding: 70px 0 20px;
+    }
+
+    .featured-panel {
+      position: relative;
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      border-radius: 40px;
+      overflow: hidden;
+      background:
+        radial-gradient(120% 120% at 0% 0%, rgba(198, 238, 122, 0.32), transparent 55%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(236, 253, 243, 0.82));
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow-lg), inset 0 1px 0 #fff;
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
+    }
+
+    .featured-media {
+      position: relative;
+      min-height: 500px;
+      display: grid;
+      place-items: center;
+      padding: 42px 28px;
+      background:
+        radial-gradient(70% 60% at 50% 45%, rgba(20, 160, 90, 0.18), transparent 70%),
+        linear-gradient(160deg, #f6fdf8, #dff6e8);
+      isolation: isolate;
+    }
+
+    .featured-media::before {
+      content: "";
+      position: absolute;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      border: 1px dashed rgba(15, 122, 69, 0.24);
+      animation: spin 26s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .featured-media img {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 380px;
+      max-height: 500px;
+      object-fit: contain;
+      filter: drop-shadow(0 28px 48px rgba(6, 42, 23, 0.28));
+      transition: transform 0.8s var(--ease);
+    }
+
+    .featured-panel:hover .featured-media img {
+      transform: translateY(-8px) rotate(-1.5deg) scale(1.03);
+    }
+
+    .featured-badge {
+      position: absolute;
+      top: 22px;
+      left: 22px;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: var(--grad);
+      color: var(--white);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      box-shadow: 0 12px 26px rgba(20, 160, 90, 0.35);
+    }
+
+    .featured-copy {
+      padding: clamp(30px, 4vw, 58px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .featured-copy .section-title {
+      margin-bottom: 10px;
+    }
+
+    .featured-tagline {
+      color: var(--primary-deep);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .featured-copy .section-copy {
+      max-width: 560px;
+    }
+
+    .featured-benefits {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .featured-benefits li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.62);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow-sm);
+      color: var(--primary-dark);
+      font-size: 0.85rem;
+      font-weight: 600;
+      line-height: 1.35;
+    }
+
+    .featured-benefits i {
+      color: var(--primary-medium);
+      margin-top: 2px;
+    }
+
+    .featured-meta {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      padding: 14px 18px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.62);
+      border: 1px dashed rgba(15, 122, 69, 0.24);
+      margin-bottom: 20px;
+    }
+
+    .featured-price {
+      color: var(--primary-dark);
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+
+    .featured-pack {
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    .featured-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .featured-actions .btn {
+      width: auto;
+    }
+
+    .featured-note {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 0.76rem;
+      line-height: 1.45;
+    }
+
+    @media (max-width: 991px) {
+      .featured-product {
+        padding-top: 50px;
+      }
+
+      .featured-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .featured-media {
+        min-height: 360px;
+        padding: 30px 20px;
+      }
+
+      .featured-media img {
+        max-height: 340px;
+        max-width: 270px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .featured-benefits {
+        grid-template-columns: 1fr;
+      }
+
+      .landing-spotlight {
+        width: 100%;
+        border-radius: 18px;
+        align-items: flex-start;
+      }
+    }
+
+    /* ---------- Quick actions ---------- */
+    .quick-actions {
+      margin-top: -50px;
+      position: relative;
+      z-index: 5;
+    }
+
+    .quick-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .quick-card {
+      background: var(--glass);
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      padding: 26px;
+      box-shadow: var(--glass-shadow), var(--shadow-md);
+      transition: var(--transition);
+    }
+
+    .quick-card:hover {
+      transform: translateY(-8px) scale(1.015);
+      box-shadow: var(--shadow-lg), inset 0 1px 0 #fff;
+      background: var(--glass-strong);
+    }
+
+    .quick-card i {
+      width: 52px;
+      height: 52px;
+      display: inline-grid;
+      place-items: center;
+      background: var(--primary-soft);
+      color: var(--primary-deep);
+      border-radius: 18px;
+      margin-bottom: 18px;
+      font-size: 1.2rem;
+      transition: var(--transition);
+    }
+
+    .quick-card:hover i {
+      background: var(--grad);
+      color: var(--white);
+      transform: rotate(-8deg) scale(1.1);
+      box-shadow: 0 12px 24px rgba(20, 160, 90, 0.35);
+    }
+
+    .quick-card h3 {
+      color: var(--primary-dark);
+      font-size: 1.08rem;
+      margin-bottom: 6px;
+      letter-spacing: -0.01em;
+    }
+
+    .quick-card p {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    /* spotlight hover (shared) */
+    .fx {
+      position: relative;
+    }
+
+    .fx::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      border-radius: inherit;
+      background: radial-gradient(360px circle at var(--mx, 50%) var(--my, 50%), rgba(20, 160, 90, 0.16), transparent 62%);
+    }
+
+    .fx:hover::after {
+      opacity: 1;
+    }
+
+    /* ---------- Marquee ---------- */
+    .marquee {
+      margin-top: 60px;
+      overflow: hidden;
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+      mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 14px;
+      width: max-content;
+      animation: marquee 45s linear infinite;
+    }
+
+    .marquee:hover .marquee-track {
+      animation-play-state: paused;
+    }
+
+    @keyframes marquee {
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    .marquee-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 22px;
+      border-radius: 999px;
+      background: var(--glass);
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--glass-shadow);
+      color: var(--primary-dark);
+      font-weight: 700;
+      font-size: 0.9rem;
+      white-space: nowrap;
+      transition: var(--transition);
+    }
+
+    .marquee-item i {
+      color: var(--primary-medium);
+    }
+
+    .marquee-item:hover {
+      background: var(--grad);
+      color: var(--white);
+      transform: translateY(-3px);
+    }
+
+    .marquee-item:hover i {
+      color: var(--accent-lime);
+    }
+
+    /* ---------- Shared glass cards ---------- */
+    .update-card,
+    .product-card,
+    .form-panel,
+    .info-panel {
+      background: var(--glass);
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      box-shadow: var(--glass-shadow);
+    }
+
+    /* ---------- Disease combos ---------- */
+    .disease-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 26px;
+      perspective: 1400px;
+    }
+
+    .disease-card {
+      min-height: 580px;
+      position: relative;
+      isolation: isolate;
+      color: var(--white);
+      border-radius: 32px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      box-shadow: var(--shadow-md);
+      transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      background-position: center;
+      background-size: cover;
+      will-change: transform;
+    }
+
+    .disease-card.tilting {
+      transition: transform 0.12s linear, box-shadow 0.5s var(--ease);
+    }
+
+    .disease-card:hover {
+      box-shadow: var(--shadow-lg);
+    }
+
+    .disease-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background: inherit;
+      transition: transform 1s var(--ease);
+    }
+
+    .disease-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(180deg, rgba(4, 28, 15, 0) 0%, rgba(4, 28, 15, 0.35) 45%, rgba(4, 28, 15, 0.85) 100%);
+    }
+
+    .disease-card:hover::before {
+      transform: scale(1.1);
+    }
+
+    .glare {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      background: radial-gradient(320px circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.28), transparent 60%);
+    }
+
+    .disease-card:hover .glare {
+      opacity: 1;
+    }
+
+    .disease-content {
+      position: relative;
+      z-index: 1;
+      margin: 12px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      background: var(--glass-dark);
+      backdrop-filter: blur(22px) saturate(160%);
+      -webkit-backdrop-filter: blur(22px) saturate(160%);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.28);
+      border-radius: 24px;
+    }
+
+    .disease-content h3 {
+      font-size: 1.4rem;
+      color: var(--white);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+
+    .disease-content p {
+      color: #d6efe1;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .combo-products {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin: 2px 0;
+    }
+
+    .combo-product {
+      min-width: 0;
+      background: rgba(255, 255, 255, 0.92);
+      border-radius: 16px;
+      padding: 7px;
+      display: grid;
+      grid-template-rows: 58px auto;
+      gap: 6px;
+      transition: transform 0.4s var(--spring), box-shadow 0.4s ease;
+    }
+
+    .combo-product:hover {
+      transform: translateY(-6px) scale(1.06);
+      box-shadow: 0 14px 26px rgba(0, 0, 0, 0.3);
+    }
+
+    .combo-product img {
+      width: 100%;
+      height: 58px;
+      object-fit: contain;
+    }
+
+    .combo-product span {
+      color: var(--primary-dark);
+      font-size: 0.64rem;
+      line-height: 1.15;
+      font-weight: 700;
+      text-align: center;
+      overflow-wrap: anywhere;
+    }
+
+    .combo-more {
+      display: grid;
+      place-items: center;
+      color: var(--white);
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px dashed rgba(255, 255, 255, 0.45);
+      border-radius: 16px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      min-height: 101px;
+      text-align: center;
+      padding: 8px;
+    }
+
+    .combo-summary {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      color: #e6f9ee;
+      font-size: 0.84rem;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 16px;
+      padding: 12px 16px;
+    }
+
+    .combo-summary strong {
+      color: var(--accent-lime);
+      font-size: 1.12rem;
+      letter-spacing: -0.01em;
+    }
+
+    .disease-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .disease-actions .btn {
+      min-height: 46px;
+      padding-inline: 0.75rem;
+      white-space: normal;
+      line-height: 1.15;
+    }
+
+    /* ---------- Shop ---------- */
+    .shop-band {
+      margin: 0 14px;
+      border-radius: 48px;
+      background: rgba(255, 255, 255, 0.42);
+      backdrop-filter: blur(26px) saturate(170%);
+      -webkit-backdrop-filter: blur(26px) saturate(170%);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--glass-shadow);
+    }
+
+    .shop-controls {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-bottom: 38px;
+      background: var(--glass);
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
+      padding: 18px;
+      border-radius: 30px;
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--glass-shadow);
+    }
+
+    .search-wrapper {
+      position: relative;
+      width: 100%;
+    }
+
+    .search-wrapper i {
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--primary-medium);
+      transition: transform 0.4s var(--spring);
+    }
+
+    .search-wrapper:focus-within i {
+      transform: translateY(-50%) scale(1.25);
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 12px 20px 12px 50px;
+      border-radius: 999px;
+      border: 1px solid var(--glass-border);
+      min-height: 52px;
+      font-size: 0.95rem;
+      background: rgba(255, 255, 255, 0.7);
+    }
+
+    .filter-container {
+      width: 100%;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .filter-bar {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 8px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 4px 0 8px;
+      scroll-snap-type: x proximity;
+      scrollbar-width: thin;
+      scrollbar-color: var(--primary-medium) transparent;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .filter-bar::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .filter-bar::-webkit-scrollbar-thumb {
+      background: rgba(20, 160, 90, 0.35);
+      border-radius: 999px;
+    }
+
+    .filter-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 auto;
+      width: max-content;
+      min-height: 42px;
+      background: rgba(255, 255, 255, 0.7);
+      color: var(--primary-dark);
+      border: 1px solid var(--glass-border);
+      border-radius: 999px;
+      padding: 8px 20px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      white-space: nowrap;
+      scroll-snap-align: start;
+    }
+
+    .filter-btn:hover {
+      color: var(--primary-deep);
+      background: var(--white);
+      transform: translateY(-2px);
+    }
+
+    .filter-btn.active {
+      background: var(--grad);
+      color: var(--white);
+      border-color: transparent;
+      box-shadow: 0 10px 20px rgba(20, 160, 90, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+      transform: translateY(-2px);
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+    }
+
+    .product-card {
+      overflow: hidden;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      border-radius: 28px;
+      animation: cardIn 0.7s var(--ease) backwards;
+      animation-delay: calc(var(--i, 0) * 55ms);
+    }
+
+    @keyframes cardIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.94);
+      }
+    }
+
+    .product-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-lg), inset 0 1px 0 #fff;
+      background: var(--glass-strong);
+    }
+
+    .product-image {
+      height: 210px;
+      background: linear-gradient(160deg, #f1faf5, #dcf2e6);
+      overflow: hidden;
+      margin: 10px;
+      border-radius: 20px;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.9s var(--ease);
+    }
+
+    .product-card:hover .product-image img {
+      transform: scale(1.1) rotate(1deg);
+    }
+
+    .product-info {
+      padding: 10px 18px 20px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .product-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .product-tag {
+      display: inline-block;
+      width: fit-content;
+      color: var(--white);
+      background: var(--primary-deep);
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 0.68rem;
+      font-weight: 700;
+    }
+
+    .product-tag.secondary {
+      color: var(--primary-deep);
+      background: rgba(255, 255, 255, 0.75);
+      border: 1px solid var(--line);
+    }
+
+    .product-tag.new {
+      color: var(--primary-dark);
+      background: var(--accent-lime);
+      box-shadow: 0 6px 14px rgba(198, 238, 122, 0.5);
+    }
+
+    .product-title {
+      color: var(--primary-dark);
+      font-weight: 800;
+      font-size: 1.05rem;
+      line-height: 1.28;
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+    }
+
+    .product-desc {
+      color: var(--muted);
+      font-size: 0.88rem;
+      margin-bottom: 16px;
+      flex: 1;
+    }
+
+    .price-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 14px;
+      padding-top: 14px;
+      border-top: 1px dashed rgba(15, 122, 69, 0.22);
+    }
+
+    .price {
+      color: var(--primary-dark);
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .stock {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--primary-deep);
+      font-size: 0.74rem;
+      font-weight: 700;
+    }
+
+    .stock::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #22c55e;
+      animation: ping 2s infinite;
+    }
+
+    .notice {
+      margin-top: 26px;
+      color: var(--muted);
+      font-size: 0.86rem;
+      background: var(--glass);
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
+      border-radius: 18px;
+      padding: 14px 18px;
+      border: 1px solid var(--glass-border);
+    }
+
+    .notice i {
+      color: var(--primary-medium);
+      margin-right: 6px;
+    }
+
+    /* ---------- Forms ---------- */
+    .appointment-layout {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .form-panel,
+    .info-panel {
+      padding: 38px;
+      border-radius: 34px;
+    }
+
+    .info-panel {
+      background: linear-gradient(135deg, #14a05a, #0b6b3c, #0f7a45, #14a05a);
+      background-size: 300% 300%;
+      animation: gradShift 12s ease infinite;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-md), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+    }
+
+    @keyframes gradShift {
+
+      0%,
+      100% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+    }
+
+    .info-panel::before {
+      content: "";
+      position: absolute;
+      width: 320px;
+      height: 320px;
+      right: -110px;
+      top: -110px;
+      border-radius: 50%;
+      background: rgba(198, 238, 122, 0.2);
+      filter: blur(6px);
+      animation: floatA 14s ease-in-out infinite;
+    }
+
+    .info-panel>* {
+      position: relative;
+      z-index: 1;
+    }
+
+    .info-panel .eyebrow {
+      background: rgba(255, 255, 255, 0.16);
+      border-color: rgba(255, 255, 255, 0.3);
+      color: #eafff3;
+    }
+
+    .info-panel .eyebrow::before {
+      background: var(--accent-lime);
+    }
+
+    .info-panel .section-title {
+      color: var(--white);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .form-group.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      display: block;
+      color: var(--primary-dark);
+      font-size: 0.82rem;
+      font-weight: 700;
+      margin-bottom: 7px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      min-height: 52px;
+      border: 1px solid var(--glass-border);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.6);
+      box-shadow: inset 0 2px 6px rgba(6, 42, 23, 0.05);
+      color: var(--ink);
+      font-family: inherit;
+      font-size: 0.95rem;
+      padding: 0.8rem 1.05rem;
+      transition: var(--transition);
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      background: var(--white);
+      border-color: var(--primary-medium);
+      box-shadow: 0 0 0 4px rgba(20, 160, 90, 0.16), 0 10px 24px rgba(20, 160, 90, 0.12);
+      transform: translateY(-1px);
+    }
+
+    .form-grid .btn {
+      width: 100%;
+    }
+
+    .info-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 26px;
+    }
+
+    .info-item {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 14px;
+      align-items: start;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-radius: 20px;
+      padding: 14px;
+      transition: var(--transition);
+    }
+
+    .info-item:hover {
+      background: rgba(255, 255, 255, 0.22);
+      transform: translateX(8px);
+    }
+
+    .info-item i {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      color: var(--primary-dark);
+      background: var(--accent-lime);
+      border-radius: 16px;
+    }
+
+    .info-item strong {
+      display: block;
+      color: var(--white);
+      margin-bottom: 2px;
+    }
+
+    .info-item span {
+      color: #d2efdf;
+      font-size: 0.9rem;
+    }
+
+    /* ---------- Updates ---------- */
+    .updates-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr 0.9fr;
+      gap: 22px;
+    }
+
+    .update-card {
+      overflow: hidden;
+      border-radius: 30px;
+      transition: var(--transition);
+    }
+
+    .update-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg), inset 0 1px 0 #fff;
+      background: var(--glass-strong);
+    }
+
+    .update-card.featured {
+      grid-row: span 2;
+    }
+
+    .update-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .update-card.product-update img {
+      object-fit: contain;
+      background: linear-gradient(160deg, #f1faf5, #dcf2e6);
+      padding: 16px;
+      transition: transform 0.8s var(--ease);
+    }
+
+    .update-card:hover img {
+      transform: scale(1.06);
+    }
+
+    .update-card.featured img {
+      height: 360px;
+    }
+
+    .update-content {
+      padding: 24px;
+      position: relative;
+      background: var(--glass);
+    }
+
+    .update-meta {
+      display: inline-block;
+      color: var(--primary-deep);
+      background: var(--primary-soft);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 4px 12px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .update-card h3 {
+      color: var(--primary-dark);
+      line-height: 1.25;
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+    }
+
+    .update-card p {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    /* ---------- Contact ---------- */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 24px;
+    }
+
+    .map-panel {
+      position: relative;
+      min-height: 480px;
+      border-radius: 34px;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      background:
+        linear-gradient(160deg, rgba(6, 42, 23, 0.1), rgba(6, 42, 23, 0.6)),
+        url("https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1200&q=80") center/cover no-repeat;
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      padding: 16px;
+    }
+
+    .map-chip {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      width: 100%;
+      padding: 16px 18px;
+      color: var(--white);
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
+      backdrop-filter: blur(20px) saturate(160%);
+      -webkit-backdrop-filter: blur(20px) saturate(160%);
+      border-radius: 24px;
+    }
+
+    .map-chip i {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      background: var(--accent-lime);
+      color: var(--primary-dark);
+      font-size: 1.1rem;
+    }
+
+    .map-chip strong {
+      display: block;
+    }
+
+    .map-chip span {
+      font-size: 0.86rem;
+      color: #d6efe1;
+    }
+
+    /* ---------- Footer (compact white glass) ---------- */
+    .site-footer {
+      margin: 30px 14px 14px;
+      padding: 28px 0 14px;
+      background: var(--glass-strong);
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
+      border: 1px solid var(--glass-border);
+      border-radius: 30px;
+      box-shadow: var(--glass-shadow), 0 -12px 40px rgba(6, 42, 23, 0.05);
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+
+    .sf-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 0.8fr 1.4fr auto;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .sf-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .sf-logo img {
+      width: 42px;
+      height: 42px;
+      object-fit: contain;
+      border-radius: 50%;
+      background: var(--white);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .sf-logo strong {
+      display: block;
+      color: var(--primary-dark);
+      font-size: 1.02rem;
+      line-height: 1.1;
+    }
+
+    .sf-logo span {
+      color: var(--primary-deep);
+      font-size: 0.72rem;
+      font-weight: 600;
+    }
+
+    .sf-brand p {
+      margin-top: 10px;
+      max-width: 320px;
+      line-height: 1.5;
+    }
+
+    .site-footer h4 {
+      color: var(--primary-dark);
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 10px;
+    }
+
+    .sf-links {
+      display: grid;
+      gap: 6px;
+    }
+
+    .sf-links a,
+    .sf-contact a,
+    .sf-contact p {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--muted);
+      transition: var(--transition);
+      overflow-wrap: anywhere;
+    }
+
+    .sf-contact {
+      display: grid;
+      gap: 6px;
+    }
+
+    .sf-contact i {
+      width: 16px;
+      color: var(--primary-medium);
+      text-align: center;
+    }
+
+    .sf-links a:hover,
+    .sf-contact a:hover {
+      color: var(--primary-deep);
+      transform: translateX(5px);
+    }
+
+    .sf-social {
+      display: flex;
+      gap: 8px;
+    }
+
+    .sf-social a {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--primary-soft);
+      border: 1px solid var(--line);
+      color: var(--primary-deep);
+      transition: all 0.45s var(--spring);
+    }
+
+    .sf-social a:hover {
+      background: var(--grad);
+      color: var(--white);
+      transform: translateY(-4px) rotate(-8deg);
+    }
+
+    .sf-bottom {
+      margin-top: 18px;
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
+      text-align: center;
+      font-size: 0.78rem;
+    }
+
+    @media (max-width: 991px) {
+      .site-footer {
+        margin: 24px 10px 10px;
+        border-radius: 26px;
+        padding: 22px 0 12px;
+      }
+
+      .sf-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 20px 16px;
+      }
+
+      .sf-brand,
+      .sf-follow {
+        grid-column: 1 / -1;
+      }
+    }
+
+    /* ---------- Floating WhatsApp ---------- */
+    .fab-whatsapp {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 90;
+      width: 60px;
+      height: 60px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #2bd36b, #16a34a);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      color: var(--white);
+      font-size: 1.75rem;
+      box-shadow: 0 16px 34px rgba(34, 197, 94, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+      transition: all 0.45s var(--spring);
+    }
+
+    .fab-whatsapp:hover {
+      transform: scale(1.12) rotate(-8deg);
+    }
+
+    .fab-whatsapp::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 2px solid #22c55e;
+      animation: pulse 2.2s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        opacity: 0.7;
+      }
+
+      100% {
+        transform: scale(1.7);
+        opacity: 0;
+      }
+    }
+
+    /* ---------- Reveal ---------- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(46px) scale(0.96);
+      filter: blur(6px);
+      transition: opacity 0.9s var(--ease), transform 0.9s var(--ease), filter 0.9s var(--ease);
+      transition-delay: var(--d, 0ms);
+    }
+
+    .reveal.in {
+      opacity: 1;
+      transform: none;
+      filter: blur(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+        filter: none;
+      }
+    }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 1100px) {
+
+      .quick-grid,
+      .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .appointment-layout,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .updates-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+
+
+    }
+
+    @media (max-width: 991px) {
+      .container {
+        width: min(100% - 28px, 1200px);
+      }
+
+      .section {
+        padding: 64px 0;
+      }
+
+      .section-header {
+        margin-bottom: 28px;
+      }
+
+      .top-strip {
+        display: none;
+      }
+
+      header {
+        top: 8px;
+        padding-top: 8px;
+      }
+
+      .nav-shell {
+        padding: 0 8px 0 12px;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+
+      .logo h1 {
+        font-size: 1.1rem;
+      }
+
+      .logo-mark {
+        width: 42px;
+        height: 42px;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 220;
+        width: min(84vw, 320px);
+        background: rgba(255, 255, 255, 0.86);
+        backdrop-filter: blur(26px) saturate(180%);
+        -webkit-backdrop-filter: blur(26px) saturate(180%);
+        border-left: 1px solid var(--glass-border);
+        box-shadow: -20px 0 50px rgba(4, 26, 14, 0.25);
+        flex-direction: column;
+        align-items: stretch;
+        gap: 4px;
+        padding: 84px 14px 18px;
+        overflow-y: auto;
+        transform: translateX(105%);
+        transition: transform 0.5s var(--ease);
+        border-radius: 32px 0 0 32px;
+      }
+
+      .nav-links a.nav-link {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        min-height: 52px;
+        padding: 0 16px;
+        border-radius: 18px;
+        font-size: 0.96rem;
+        color: var(--primary-dark);
+        opacity: 0;
+        transform: translateX(24px);
+        transition: var(--transition);
+      }
+
+      body.menu-open .nav-links a.nav-link {
+        opacity: 1;
+        transform: none;
+      }
+
+      body.menu-open .nav-links a.nav-link:nth-of-type(1) {
+        transition-delay: 0.08s;
+      }
+
+      body.menu-open .nav-links a.nav-link:nth-of-type(2) {
+        transition-delay: 0.13s;
+      }
+
+      body.menu-open .nav-links a.nav-link:nth-of-type(3) {
+        transition-delay: 0.18s;
+      }
+
+      body.menu-open .nav-links a.nav-link:nth-of-type(4) {
+        transition-delay: 0.23s;
+      }
+
+      body.menu-open .nav-links a.nav-link:nth-of-type(5) {
+        transition-delay: 0.28s;
+      }
+
+      body.menu-open .nav-links a.nav-link:nth-of-type(6) {
+        transition-delay: 0.33s;
+      }
+
+      .nav-links .nav-link i {
+        display: inline-block;
+        color: var(--primary-medium);
+        width: 20px;
+        font-size: 1.05rem;
+      }
+
+      .nav-links a.nav-cta,
+      .nav-links a.nav-cta.active {
+        margin: 12px 0 0;
+        justify-content: center;
+      }
+
+      .nav-links a.nav-cta i {
+        color: var(--white);
+      }
+
+      .mobile-menu-head {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 68px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 12px 18px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .mobile-menu-brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .mobile-menu-brand img {
+        width: 38px;
+        height: 38px;
+        object-fit: contain;
+        border-radius: 50%;
+        background: var(--white);
+        box-shadow: var(--shadow-sm);
+      }
+
+      .mobile-menu-brand strong {
+        font-size: 1.05rem;
+        color: var(--primary-dark);
+      }
+
+      .menu-close {
+        width: 40px;
+        height: 40px;
+        display: grid;
+        place-items: center;
+        border: 1px solid var(--glass-border);
+        background: var(--white);
+        border-radius: 50%;
+        color: var(--primary-dark);
+        font-size: 1.2rem;
+        cursor: pointer;
+      }
+
+      .menu-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 210;
+        display: block;
+        border: 0;
+        background: rgba(2, 18, 10, 0.5);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.35s ease, visibility 0.35s ease;
+      }
+
+      body.menu-open {
+        overflow: hidden;
+      }
+
+      body.menu-open .nav-links {
+        transform: translateX(0);
+      }
+
+      body.menu-open .menu-overlay {
+        opacity: 1;
+        visibility: visible;
+      }
+
+
+
+
+
+
+
+
+
+
+      .quick-actions {
+        margin-top: -20px;
+      }
+
+      .marquee {
+        margin-top: 40px;
+      }
+
+      .quick-grid,
+      .product-grid,
+      .updates-grid,
+      .form-grid,
+      .disease-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-panel,
+      .info-panel {
+        padding: 24px 20px;
+        border-radius: 28px;
+      }
+
+      .update-card.featured {
+        grid-row: auto;
+      }
+
+      .update-card.featured img {
+        height: 240px;
+      }
+
+      .map-panel {
+        min-height: 300px;
+        border-radius: 28px;
+      }
+
+      .shop-band {
+        margin: 0 10px;
+        border-radius: 32px;
+      }
+
+      .shop-controls {
+        padding: 12px;
+        border-radius: 24px;
+      }
+
+      .combo-products {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .disease-actions {
+        grid-template-columns: 1fr;
+      }
+
+      .btn {
+        white-space: normal;
+        text-align: center;
+      }
+
+
+
+
+
+
+
+
+
+      .bg-orbs span {
+        filter: blur(50px);
+      }
+    }
+
+    @media (max-width: 480px) {
+
+
+
+
+
+      .combo-products {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .disease-card {
+        min-height: 640px;
+      }
+
+
+
+      .fab-whatsapp {
+        width: 54px;
+        height: 54px;
+        right: 14px;
+        bottom: 14px;
+      }
+    }
+  
+    /* ---------- Light / white theme overrides ---------- */
+    :root {
+      --bg: #f9fbfa;
+    }
+
+    .bg-orbs span {
+      opacity: 0.3;
+    }
+
+    .top-strip {
+      background: rgba(255, 255, 255, 0.75);
+      color: var(--muted);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .top-strip i {
+      color: var(--primary-medium);
+    }
+
+    .quick-actions {
+      margin-top: 0;
+    }
+
+    .info-panel {
+      background: var(--glass);
+      animation: none;
+      color: var(--ink);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--glass-shadow), var(--shadow-sm);
+    }
+
+    .info-panel::before {
+      background: rgba(20, 160, 90, 0.12);
+    }
+
+    .info-panel .eyebrow {
+      background: var(--glass-strong);
+      color: var(--primary-deep);
+      border-color: var(--glass-border);
+    }
+
+    .info-panel .eyebrow::before {
+      background: var(--primary-medium);
+    }
+
+    .info-panel .section-title {
+      color: var(--primary-dark);
+    }
+
+    .info-item {
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--glass-shadow);
+    }
+
+    .info-item:hover {
+      background: var(--white);
+    }
+
+    .info-item i {
+      background: var(--grad);
+      color: var(--white);
+    }
+
+    .info-item strong {
+      color: var(--primary-dark);
+    }
+
+    .info-item span {
+      color: var(--muted);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="scroll-progress" id="scroll-progress"></div>
+  <div class="bg-orbs" aria-hidden="true"><span></span><span></span><span></span></div>
+  <div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
+
+  <div class="top-strip">
+    <div class="container">
+      <span><i class="fas fa-location-dot"></i> Kampala, Uganda - we deliver worldwide</span>
+      <span><i class="fab fa-whatsapp"></i> WhatsApp: +256 750 516581</span>
+    </div>
+  </div>
+
+  <header id="site-header">
+    <div class="container">
+      <div class="nav-shell">
+        <div class="navbar">
+          <a href="#home" class="logo">
+            <img class="logo-mark" src="images/logo/logo.png" alt="VINZ Health Hub logo">
+            <div>
+              <h1>VINZ Health Hub</h1>
+              <span>Health is the greatest wealth</span>
+            </div>
+          </a>
+          <button class="menu-toggle" type="button" aria-label="Open menu" aria-controls="site-menu"
+            aria-expanded="false">
+            <span class="hamburger-box">
+              <span class="hamburger-inner"></span>
+            </span>
+          </button>
+          <nav class="nav-links" id="site-menu" aria-label="Main navigation">
+            <div class="mobile-menu-head">
+              <div class="mobile-menu-brand">
+                <img src="images/logo/logo.png" alt="VINZ Health Hub logo">
+                <strong>VINZ Health Hub</strong>
+              </div>
+              <button class="menu-close" type="button" aria-label="Close menu">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+            <a href="#home" class="nav-link active"><i class="fas fa-house"></i> Home</a>
+            <a href="#services" class="nav-link"><i class="fas fa-heart-pulse"></i> Care</a>
+            <a href="#shop" class="nav-link"><i class="fas fa-bag-shopping"></i> Shop</a>
+            <a href="#updates" class="nav-link"><i class="fas fa-newspaper"></i> Updates</a>
+            <a href="#contact" class="nav-link"><i class="fas fa-envelope"></i> Contact</a>
+            <a href="#appointment" class="nav-link nav-cta"><i class="fas fa-calendar-check"></i> Book appointment</a>
+          </nav>
+        </div>
+      </div>
+    </div>
+    <button class="menu-overlay" type="button" aria-label="Close menu"></button>
+  </header>
+
+  <main>
+    <section id="home" class="landing">
+      <div class="container landing-grid">
+        <div class="landing-copy">
+          <div class="landing-kicker"><i class="fas fa-shield-heart"></i> Welcome to VINZ Health Hub</div>
+          <h2 class="landing-title">Your trusted home for
+            <span class="type-wrap"><span id="typed-word"></span><span class="caret"></span></span>
+          </h2>
+          <p>Order selected medicines and wellness products, book a consultation, and receive clear guidance from VINZ
+            Health Hub before you buy.</p>
+          <div class="landing-actions">
+            <a href="#shop" class="btn btn-primary"><i class="fas fa-bag-shopping"></i> Shop products</a>
+            <a href="#appointment" class="btn btn-secondary"><i class="fas fa-calendar-check"></i> Book appointment</a>
+          </div>
+          <a href="#glucobalance" class="landing-spotlight">
+            <span class="landing-spotlight-tag">New</span>
+            <span>GlucoBalance - daily glucose balance support</span>
+            <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+        <div class="landing-visual">
+          <div class="visual-stage">
+            <div class="visual-frame">
+              <div class="landing-slide active" style="background-image: url('images/img/diabetes/DIABETES.jpg');"></div>
+              <div class="landing-slide" style="background-image: url('images/img/hypertention/HYPERTENSION.jpg');"></div>
+              <div class="landing-slide" style="background-image: url('images/img/Hepatis/HEPATITIS.jpg');"></div>
+              <div class="landing-slide"
+                style="background-image: url('images/img/women hormonal imbalance/WOMEN HORMONAL IMBALANCE.jpg');"></div>
+            </div>
+            <div class="float-chip chip-a"><i class="fab fa-whatsapp"></i>
+              <div><strong>24/7</strong><span>WhatsApp ordering support</span></div>
+            </div>
+            <div class="float-chip chip-b"><i class="fas fa-truck-fast"></i>
+              <div><strong>Worldwide</strong><span>We deliver to you</span></div>
+            </div>
+            <div class="float-chip chip-c"><i class="fas fa-user-check"></i>
+              <div><strong>100%</strong><span>Guided product requests</span></div>
+            </div>
+          </div>
+          <div class="landing-dots" aria-label="Hero slides">
+            <button class="landing-dot active" type="button" data-slide="0" aria-label="Slide 1"></button>
+            <button class="landing-dot" type="button" data-slide="1" aria-label="Slide 2"></button>
+            <button class="landing-dot" type="button" data-slide="2" aria-label="Slide 3"></button>
+            <button class="landing-dot" type="button" data-slide="3" aria-label="Slide 4"></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="quick-actions">
+      <div class="container">
+        <div class="quick-grid">
+          <a href="#appointment" class="quick-card fx reveal">
+            <i class="fas fa-user-doctor"></i>
+            <h3>Appointments</h3>
+            <p>Request a consultation for guidance before ordering.</p>
+          </a>
+          <a href="#shop" class="quick-card fx reveal">
+            <i class="fas fa-prescription-bottle-medical"></i>
+            <h3>Product orders</h3>
+            <p>Send product details to WhatsApp in one click.</p>
+          </a>
+          <a href="#services" class="quick-card fx reveal">
+            <i class="fas fa-heart-pulse"></i>
+            <h3>Chronic care</h3>
+            <p>Support for diabetes, blood pressure and wellness plans.</p>
+          </a>
+          <a href="#updates" class="quick-card fx reveal">
+            <i class="fas fa-newspaper"></i>
+            <h3>Health updates</h3>
+            <p>Market updates, restock notices and simple wellness tips.</p>
+          </a>
+        </div>
+      </div>
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee-track" id="marquee-track"></div>
+      </div>
+    </section>
+
+    <section id="glucobalance" class="featured-product">
+      <div class="container">
+        <div class="featured-panel reveal">
+          <div class="featured-media">
+            <span class="featured-badge"><i class="fas fa-star"></i> New arrival</span>
+            <img src="images/img/diabetes/GLUCOBALANCE.jpeg"
+              alt="GlucoBalance with bitter melon, 30 capsules by OQATA Wellness Solutions" loading="lazy">
+          </div>
+          <div class="featured-copy">
+            <div class="eyebrow">Product spotlight</div>
+            <h2 class="section-title">Meet GlucoBalance.</h2>
+            <div class="featured-tagline">Naturally inspired. Scientifically formulated.</div>
+            <p class="section-copy">GlucoBalance by OQATA Wellness Solutions is a bitter melon-based daily
+              supplement created to support healthy glucose balance, normal insulin function and steady everyday
+              energy. Each easy-to-take capsule helps take the edge off sugar cravings while complementing balanced
+              meals and an active routine, making it a simple addition to your daily metabolic wellness plan.</p>
+            <ul class="featured-benefits">
+              <li><i class="fas fa-check-circle"></i> Supports normal insulin function</li>
+              <li><i class="fas fa-check-circle"></i> Promotes healthy glucose balance</li>
+              <li><i class="fas fa-check-circle"></i> Helps reduce sugar cravings</li>
+              <li><i class="fas fa-check-circle"></i> Supports daily energy and focus</li>
+            </ul>
+            <div class="featured-meta">
+              <span class="featured-price">Price on request</span>
+              <span class="featured-pack">30 capsules &middot; dietary supplement</span>
+              <span class="stock">Available</span>
+            </div>
+            <div class="featured-actions">
+              <button class="btn btn-whatsapp" type="button" onclick="orderProduct(14)">
+                <i class="fab fa-whatsapp"></i> Order GlucoBalance
+              </button>
+              <a href="#shop" class="btn btn-secondary"><i class="fas fa-bag-shopping"></i> Explore the shop</a>
+            </div>
+            <p class="featured-note"><i class="fas fa-circle-info"></i> Dietary supplement, not a replacement for
+              prescribed medication. Consult your healthcare provider before use, especially if you manage diabetes
+              or take blood-sugar medication.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="section">
+      <div class="container">
+        <div class="section-header center reveal">
+          <div class="eyebrow">What we support</div>
+          <h2 class="section-title">Choose a full combo for each complication.</h2>
+          <p class="section-copy">VINZ Health Hub helps clients access essential wellness products, pharmacy guidance,
+            and appointment support without confusion. Each complication below shows its background condition and the
+            products grouped for that full combo.</p>
+        </div>
+        <div class="disease-grid" id="disease-catalog">
+          <!-- Dynamically populated via JS -->
+        </div>
+      </div>
+    </section>
+
+    <section id="shop" class="section shop-band">
+      <div class="container">
+        <div class="section-header reveal">
+          <div class="eyebrow">Shop products</div>
+          <h2 class="section-title">Buy a full combo or order one product.</h2>
+          <p class="section-copy">Use the combo cards above for a complete complication package, or filter here when you
+            want to order a single product through WhatsApp.</p>
+        </div>
+
+        <div class="shop-controls reveal">
+          <div class="search-wrapper">
+            <i class="fas fa-search"></i>
+            <input type="text" id="shop-search" class="search-input" placeholder="Search medicines...">
+          </div>
+          <div class="filter-container">
+            <div class="filter-bar" id="category-filters">
+              <!-- Dynamically populated via JS -->
+            </div>
+          </div>
+        </div>
+
+        <div class="product-grid" id="product-list"></div>
+        <p class="notice"><i class="fas fa-circle-info"></i> Important: product requests are confirmed by VINZ Health Hub
+          before dispatch. Always follow professional medical guidance for medicines.</p>
+      </div>
+    </section>
+
+    <section id="appointment" class="section">
+      <div class="container appointment-layout">
+        <div class="form-panel fx reveal">
+          <div class="section-header" style="margin-bottom: 26px;">
+            <div class="eyebrow">Book appointment</div>
+            <h2 class="section-title">Request a consultation.</h2>
+            <p class="section-copy">Submit your preferred time and the team will receive the details on WhatsApp.</p>
+          </div>
+          <form id="appointmentForm" class="form-grid">
+            <div class="form-group">
+              <label for="apptName">Full name</label>
+              <input id="apptName" type="text" placeholder="Your name" required>
+            </div>
+            <div class="form-group">
+              <label for="apptPhone">Phone number</label>
+              <input id="apptPhone" type="tel" placeholder="+256..." required>
+            </div>
+            <div class="form-group">
+              <label for="apptService">Service needed</label>
+              <select id="apptService" required>
+                <option value="">Select service</option>
+                <option>Pharmacist consultation</option>
+                <option>Product guidance</option>
+                <option>Chronic care support</option>
+                <option>Delivery assistance</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="apptDate">Preferred date</label>
+              <input id="apptDate" type="date" required>
+            </div>
+            <div class="form-group full">
+              <label for="apptMessage">Notes</label>
+              <textarea id="apptMessage" placeholder="Tell us what you need help with"></textarea>
+            </div>
+            <div class="form-group full">
+              <button type="submit" class="btn btn-primary"><i class="fab fa-whatsapp"></i> Send appointment
+                request</button>
+            </div>
+          </form>
+        </div>
+        <aside class="info-panel reveal">
+          <div class="eyebrow">Why book first</div>
+          <h2 class="section-title" style="font-size: 2.1rem;">Better guidance, better orders.</h2>
+          <div class="info-list">
+            <div class="info-item"><i class="fas fa-clipboard-check"></i>
+              <div><strong>Confirm the right product</strong><span>Ask about availability, price and delivery before
+                  buying.</span></div>
+            </div>
+            <div class="info-item"><i class="fas fa-truck-fast"></i>
+              <div><strong>Plan delivery</strong><span>Share your location and preferred dispatch time.</span></div>
+            </div>
+            <div class="info-item"><i class="fas fa-user-nurse"></i>
+              <div><strong>Talk to a care assistant</strong><span>Use WhatsApp to get quick, practical next
+                  steps.</span></div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="updates" class="section" style="padding-top: 20px;">
+      <div class="container">
+        <div class="section-header reveal">
+          <div class="eyebrow">Simple blog updates</div>
+          <h2 class="section-title">New in stock, health notes and market updates.</h2>
+          <p class="section-copy">Short updates help clients know what is available and what to ask about before making
+            a health product decision.</p>
+        </div>
+        <div class="updates-grid">
+          <article class="update-card fx featured product-update reveal">
+            <img src="images/img/diabetes/SUPER OMEGA.jpg" alt="Super Omega-3 Essential supplement">
+            <div class="update-content">
+              <div class="update-meta">Popular medicine</div>
+              <h3>Super Omega-3 Essential is a top pick for heart, joint and nerve support.</h3>
+              <p>Commonly added to diabetes, hypertension, neuropathy, kidney, men and women wellness combos.</p>
+            </div>
+          </article>
+          <article class="update-card fx product-update reveal">
+            <img src="images/img/Hepatis/LIVER CARE.png" alt="Liver Care Formula">
+            <div class="update-content">
+              <div class="update-meta">Liver care</div>
+              <h3>Liver Care Formula is available for detox and recovery support.</h3>
+              <p>Often requested for hepatitis, ulcers, kidney support, allergies and full body cleansing plans.</p>
+            </div>
+          </article>
+          <article class="update-card fx product-update reveal">
+            <img src="images/img/diabetes/RESVERATROL.jpg" alt="Resveratrol Active Complex">
+            <div class="update-content">
+              <div class="update-meta">Antioxidant support</div>
+              <h3>Resveratrol Active Complex supports circulation and metabolic wellness.</h3>
+              <p>Ask for it in diabetes, blood pressure, neuropathy, kidney and hormonal balance packages.</p>
+            </div>
+          </article>
+          <article class="update-card fx product-update reveal">
+            <img src="images/img/allergies/COLON DETOX.png" alt="Colon Detox and Cleansing product">
+            <div class="update-content">
+              <div class="update-meta">Digestive wellness</div>
+              <h3>Colon Detox & Cleansing remains popular for gut and detox support.</h3>
+              <p>Used across allergies, ulcers, weight management, women wellness and kidney support combos.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section" style="padding-top: 20px;">
+      <div class="container contact-grid">
+        <div class="map-panel reveal" aria-label="VINZ Health Hub contact image">
+          <div class="map-chip">
+            <i class="fas fa-location-dot"></i>
+            <div><strong>VINZ Health Hub</strong><span>Kampala, Uganda - we deliver worldwide</span></div>
+          </div>
+        </div>
+        <div class="form-panel fx reveal">
+          <div class="section-header" style="margin-bottom: 26px;">
+            <div class="eyebrow">Contact us</div>
+            <h2 class="section-title">Talk to VINZ Health Hub.</h2>
+            <p class="section-copy">Send a general inquiry, ask about a product, or request delivery support.</p>
+          </div>
+          <form id="contactForm" class="form-grid">
+            <div class="form-group">
+              <label for="contactName">Name</label>
+              <input type="text" id="contactName" placeholder="Full name" required>
+            </div>
+            <div class="form-group">
+              <label for="contactPhone">Phone</label>
+              <input type="tel" id="contactPhone" placeholder="+256..." required>
+            </div>
+            <div class="form-group full">
+              <label for="contactMsg">Message</label>
+              <textarea id="contactMsg" placeholder="How can we help?" required></textarea>
+            </div>
+            <div class="form-group full">
+              <button type="submit" class="btn btn-primary"><i class="fab fa-whatsapp"></i> Send message</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="sf-grid">
+        <div class="sf-brand">
+          <a href="#home" class="sf-logo">
+            <img src="images/logo/logo.png" alt="VINZ Health Hub logo">
+            <div><strong>VINZ Health Hub</strong><span>Health is the greatest wealth</span></div>
+          </a>
+          <p>Medicines, wellness products, appointments and delivery support worldwide.</p>
+        </div>
+        <nav class="sf-links" aria-label="Footer links">
+          <h4>Links</h4>
+          <a href="#home">Home</a>
+          <a href="#services">Care</a>
+          <a href="#shop">Shop</a>
+          <a href="#appointment">Appointments</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <div class="sf-contact">
+          <h4>Contact</h4>
+          <a href="https://wa.me/256750516581?text=Hello%20VINZ%20Health%20Hub%2C%20I%20need%20assistance."
+            target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> +256 750 516581</a>
+          <a href="mailto:vinzhealthhub@gmail.com"><i class="fas fa-envelope"></i> vinzhealthhub@gmail.com</a>
+          <p><i class="fas fa-location-dot"></i> Kampala, Uganda</p>
+          <p><i class="fas fa-truck-fast"></i> We deliver worldwide</p>
+        </div>
+        <div class="sf-follow">
+          <h4>Follow</h4>
+          <div class="sf-social">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+      </div>
+      <p class="sf-bottom">&copy; 2026 VINZ Health Hub. Always consult a qualified health professional before using
+        medicines.</p>
+    </div>
+  </footer>
+
+  <a class="fab-whatsapp" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"
+    href="https://wa.me/256750516581?text=Hello%20VINZ%20Health%20Hub%2C%20I%20need%20assistance.">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <script>
+    const WHATSAPP_NUMBER = "256750516581";
+
+    const DISEASES = {
+      allergies: {
+        name: "Allergies & Respiratory",
+        folder: "allergies",
+        image: "images/img/allergies/ALLERGIES.webp",
+        desc: "Support for seasonal allergies, breathing comfort, and natural immunity boosters."
+      },
+      diabetes: {
+        name: "Diabetes Care",
+        folder: "diabetes",
+        image: "images/img/diabetes/DIABETES.jpg",
+        desc: "Glucose monitoring assistance, metabolic health, and daily wellness refills."
+      },
+      hepatitis: {
+        name: "Hepatitis & Liver Care",
+        folder: "Hepatis",
+        image: "images/img/Hepatis/HEPATITIS.jpg",
+        desc: "Targeted support for liver cell recovery, detoxification, and immune health."
+      },
+      hypertension: {
+        name: "Hypertension & Cardio",
+        folder: "hypertention",
+        image: "images/img/hypertention/HYPERTENSION.jpg",
+        desc: "Natural solutions and wellness protocols for blood pressure and heart care."
+      },
+      joint_pain: {
+        name: "Joint & Bone Pain",
+        folder: "join pain",
+        image: "images/img/join pain/JOINT PAIN.jpg",
+        desc: "Relief for joint stiffness, bone health support, and mobility restoration."
+      },
+      kidney_issues: {
+        name: "Kidney & Renal Health",
+        folder: "kidney issues",
+        image: "images/img/kidney issues/KIDNEY ISSUES.jpg",
+        desc: "Kidney wellness supplements for hydration, filtration support, and urinary health."
+      },
+      mens_health: {
+        name: "Men's Sexual Health",
+        folder: "menz sexuzl helth",
+        image: "images/img/menz sexuzl helth/MEN HEALTH.avif",
+        desc: "Natural performance boosters, hormone support, and physical vitality formulas."
+      },
+      neuropathy: {
+        name: "Neuropathy & Nerve Damage",
+        folder: "nerve  damage-neuropathy",
+        image: "images/img/nerve  damage-neuropathy/NERVE DAMAGE NEUROPATHY.jpg",
+        desc: "Nerve repair assistance, neuropathy symptom management, and cell protection."
+      },
+      obesity: {
+        name: "Weight Management",
+        folder: "obesty and weight management",
+        image: "images/img/obesty and weight management/WEIGHT MANAGEMENT.webp",
+        desc: "Natural metabolic boosters, appetite management, and healthy weight reduction."
+      },
+      ulcers: {
+        name: "Ulcers & Digestive Care",
+        folder: "ulcers",
+        image: "images/img/ulcers/ULCERS.jpg",
+        desc: "Stomach lining protection, acid balance, and digestive tract healing support."
+      },
+      womens_health: {
+        name: "Women's Hormonal Imbalance",
+        folder: "women hormonal imbalance",
+        image: "images/img/women hormonal imbalance/WOMEN HORMONAL IMBALANCE.jpg",
+        desc: "Estrogen & progesterone balance support, mood regulation, and daily female vitality."
+      }
+    };
+
+    const products = [
+      {
+        id: 14,
+        name: "GlucoBalance with Bitter Melon",
+        desc: "Bitter melon-based daily supplement supporting glucose balance, normal insulin function, steady energy and reduced sugar cravings. 30 capsules.",
+        price: "Price on request",
+        primaryTag: "Blood Sugar",
+        image: "images/img/diabetes/GLUCOBALANCE.jpeg",
+        diseases: ["diabetes"],
+        isNew: true
+      },
+      {
+        id: 1,
+        name: "Liver Care Formula",
+        desc: "Supports liver detoxification, cellular recovery, digestive wellness, and healthy metabolism.",
+        price: "UGX 150,000",
+        primaryTag: "Liver Care",
+        image: "images/img/Hepatis/LIVER CARE.png",
+        diseases: ["allergies", "diabetes", "hepatitis", "joint_pain", "kidney_issues", "neuropathy", "ulcers"]
+      },
+      {
+        id: 2,
+        name: "Super Omega-3 Essential",
+        desc: "Premium fish oil capsules for heart, brain, joint, nerve, and hormone support.",
+        price: "UGX 125,000",
+        primaryTag: "Essential Fats",
+        image: "images/img/diabetes/SUPER OMEGA.jpg",
+        diseases: ["allergies", "diabetes", "hepatitis", "hypertension", "kidney_issues", "mens_health", "neuropathy", "obesity", "womens_health"]
+      },
+      {
+        id: 3,
+        name: "Resveratrol Active Complex",
+        desc: "Powerful antioxidant for cellular aging defense, vascular protection, and metabolic health.",
+        price: "UGX 90,000",
+        primaryTag: "Antioxidants",
+        image: "images/img/diabetes/RESVERATROL.jpg",
+        diseases: ["diabetes", "hepatitis", "hypertension", "kidney_issues", "neuropathy", "ulcers", "womens_health"]
+      },
+      {
+        id: 4,
+        name: "Colon Detox & Cleansing",
+        desc: "Natural dietary fiber blend for bowel regularity, toxin elimination, and gut lining support.",
+        price: "UGX 90,000",
+        primaryTag: "Detoxification",
+        image: "images/img/allergies/COLON DETOX.png",
+        diseases: ["allergies", "hepatitis", "kidney_issues", "obesity", "ulcers", "womens_health"]
+      },
+      {
+        id: 5,
+        name: "Total Vitality Multivitamin",
+        desc: "Daily essential vitamins, minerals, and micro-nutrients to build immunity and high energy.",
+        price: "UGX 140,000",
+        primaryTag: "Multivitamins",
+        image: "images/img/allergies/TOTAL VITALITY.jpg",
+        diseases: ["allergies", "diabetes", "hypertension"]
+      },
+      {
+        id: 6,
+        name: "Trimtone Herbal Weight Tea",
+        desc: "Refreshing herbal blend that accelerates metabolism and helps manage food cravings.",
+        price: "UGX 75,000",
+        primaryTag: "Weight Tea",
+        image: "images/img/diabetes/TRIMTONE TEA.jpg",
+        diseases: ["diabetes", "obesity"]
+      },
+      {
+        id: 7,
+        name: "Muscle & Bone Strength Support",
+        desc: "Supports skeletal strength, bone density, muscle elasticity, and joint lubrication.",
+        price: "UGX 120,000",
+        primaryTag: "Bone & Joint",
+        image: "images/img/hypertention/MUSCLE BONE.png",
+        diseases: ["hypertension", "joint_pain", "kidney_issues", "mens_health", "neuropathy"]
+      },
+      {
+        id: 8,
+        name: "Hair & Skin Nutrient Complex",
+        desc: "Essential vitamins and minerals to restore natural glow, hair thickness, and nail health.",
+        price: "UGX 85,000",
+        primaryTag: "Hair & Skin",
+        image: "images/img/join pain/HAIR SKIN.jpg",
+        diseases: ["joint_pain"]
+      },
+      {
+        id: 9,
+        name: "Joint Flex Relief Cream",
+        desc: "Soothing application for quick relief of joint stiffness, arthritis, and sore muscles.",
+        price: "UGX 130,000",
+        primaryTag: "Joint Support",
+        image: "images/img/join pain/JOINT FLEX.jpg",
+        diseases: ["joint_pain"]
+      },
+      {
+        id: 10,
+        name: "Andro Brew Herbal Coffee",
+        desc: "Premium revitalizing beverage supporting male performance, stamina, and testosterone.",
+        price: "UGX 85,000",
+        primaryTag: "Men's Vitality",
+        image: "images/img/menz sexuzl helth/ANDRO BREW.png",
+        diseases: ["mens_health"]
+      },
+      {
+        id: 11,
+        name: "Andro T Strength Booster",
+        desc: "High potency capsule formulated to optimize male vigor, strength, and lean muscle mass.",
+        price: "UGX 100,000",
+        primaryTag: "Men's Health",
+        image: "images/img/menz sexuzl helth/ANDRO T.webp",
+        diseases: ["mens_health"]
+      },
+      {
+        id: 12,
+        name: "Trimtone Natural Slimming Capsules",
+        desc: "Thermogenic fat burner formulated to assist with everyday energy and weight control.",
+        price: "UGX 130,000",
+        primaryTag: "Slimming",
+        image: "images/img/obesty and weight management/TRIMTONE.png",
+        diseases: ["obesity"]
+      },
+      {
+        id: 13,
+        name: "Femmi Brew Wellness Blend",
+        desc: "Herbal infusion designed for menstrual comfort, hormonal stability, and female vitality.",
+        price: "UGX 95,000",
+        primaryTag: "Women's Wellness",
+        image: "images/img/women hormonal imbalance/FEMMI BREW.jpg",
+        diseases: ["womens_health"]
+      }
+    ];
+
+    let selectedCategory = "all";
+    let searchQuery = "";
+
+    function buildWhatsAppLink(message) {
+      return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+    }
+
+    function formatCurrency(amount) {
+      return `UGX ${amount.toLocaleString("en-US")}`;
+    }
+
+    function priceToNumber(price) {
+      return Number(price.replace(/[^\d]/g, "")) || 0;
+    }
+
+    function getFileName(path) {
+      return path.split("/").pop();
+    }
+
+    function getDiseaseProductImage(diseaseKey, product) {
+      const item = DISEASES[diseaseKey];
+      const imageOverrides = {
+        ulcers: {
+          4: "images/img/ulcers/COLON DETOX - Copy.png"
+        }
+      };
+
+      return imageOverrides[diseaseKey]?.[product.id] || `images/img/${item.folder}/${getFileName(product.image)}`;
+    }
+
+    function getDiseaseProducts(diseaseKey) {
+      return products
+        .filter(product => product.diseases.includes(diseaseKey))
+        .map(product => ({
+          ...product,
+          comboImage: getDiseaseProductImage(diseaseKey, product)
+        }));
+    }
+
+    function getComboTotal(comboProducts) {
+      return comboProducts.reduce((sum, product) => sum + priceToNumber(product.price), 0);
+    }
+
+    function hasPriceOnRequest(comboProducts) {
+      return comboProducts.some(product => priceToNumber(product.price) === 0);
+    }
+
+    function orderProduct(productId) {
+      const product = products.find(item => item.id === Number(productId));
+      if (!product) return;
+
+      const message = [
+        "Hello VINZ Health Hub, I would like to order this product:",
+        "",
+        `Product: ${product.name}`,
+        `Primary Category: ${product.primaryTag}`,
+        `Price: ${product.price}`,
+        `Details: ${product.desc}`,
+        "",
+        "Please confirm availability, delivery fee and delivery time.",
+        "My delivery location is:"
+      ].join("\n");
+
+      window.open(buildWhatsAppLink(message), "_blank");
+    }
+
+    function orderDiseaseCombo(diseaseKey) {
+      const disease = DISEASES[diseaseKey];
+      const comboProducts = getDiseaseProducts(diseaseKey);
+      const productLines = comboProducts.map((product, index) =>
+        `${index + 1}. ${product.name} - ${product.price}`
+      );
+      const totalText = hasPriceOnRequest(comboProducts)
+        ? `From ${formatCurrency(getComboTotal(comboProducts))} (some items priced on request)`
+        : formatCurrency(getComboTotal(comboProducts));
+      const message = [
+        "Hello VINZ Health Hub, I would like to order a full complication combo.",
+        "",
+        `Complication: ${disease.name}`,
+        `Combo products: ${comboProducts.length}`,
+        ...productLines,
+        "",
+        `Estimated product total: ${totalText}`,
+        "",
+        "Please confirm availability, combo price, delivery fee and delivery time.",
+        "My delivery location is:"
+      ].join("\n");
+
+      window.open(buildWhatsAppLink(message), "_blank");
+    }
+
+    function renderMarquee() {
+      const track = document.getElementById("marquee-track");
+      if (!track) return;
+      const icons = ["fa-heart-pulse", "fa-leaf", "fa-shield-heart", "fa-capsules", "fa-droplet"];
+      const items = Object.values(DISEASES).map((item, i) =>
+        `<span class="marquee-item"><i class="fas ${icons[i % icons.length]}"></i>${item.name}</span>`
+      ).join("");
+      track.innerHTML = items + items;
+    }
+
+    function renderDiseases() {
+      const diseaseCatalog = document.getElementById("disease-catalog");
+      if (!diseaseCatalog) return;
+
+      diseaseCatalog.innerHTML = Object.entries(DISEASES).map(([key, item]) => {
+        const comboProducts = getDiseaseProducts(key);
+        const visibleProducts = comboProducts.slice(0, 7);
+        const remainingCount = comboProducts.length - visibleProducts.length;
+        const productsHTML = visibleProducts.map(product => `
+          <div class="combo-product">
+            <img src="${product.comboImage}" alt="${product.name}" loading="lazy">
+            <span>${product.name}</span>
+          </div>
+        `).join("");
+        const moreHTML = remainingCount > 0 ? `<div class="combo-more">+${remainingCount}<br>more</div>` : "";
+        const comboTotalText = hasPriceOnRequest(comboProducts)
+          ? `From ${formatCurrency(getComboTotal(comboProducts))}`
+          : formatCurrency(getComboTotal(comboProducts));
+
+        return `
+        <article class="disease-card reveal" style="background-image: url('${item.image}');">
+          <span class="glare"></span>
+          <div class="disease-content">
+            <h3>${item.name}</h3>
+            <p>${item.desc}</p>
+            <div class="combo-products">
+              ${productsHTML}
+              ${moreHTML}
+            </div>
+            <div class="combo-summary">
+              <span>${comboProducts.length} products in combo</span>
+              <strong>${comboTotalText}</strong>
+            </div>
+            <div class="disease-actions">
+              <button class="btn btn-whatsapp" type="button" onclick="orderDiseaseCombo('${key}')">
+                <i class="fab fa-whatsapp"></i> Buy Combo
+              </button>
+              <button class="btn btn-secondary" type="button" onclick="selectCategoryAndScroll('${key}')">
+                <i class="fas fa-list-check"></i> View Items
+              </button>
+            </div>
+          </div>
+        </article>
+      `;
+      }).join("");
+
+      observeReveals();
+    }
+
+    function setupFilters() {
+      const filtersContainer = document.getElementById("category-filters");
+      if (!filtersContainer) return;
+
+      const allBtn = `
+        <button class="filter-btn active" type="button" data-category="all">
+          All Products
+        </button>
+      `;
+
+      const categoryBtns = Object.entries(DISEASES).map(([key, item]) => `
+        <button class="filter-btn" type="button" data-category="${key}">
+          ${item.name}
+        </button>
+      `).join("");
+
+      filtersContainer.innerHTML = allBtn + categoryBtns;
+
+      filtersContainer.querySelectorAll(".filter-btn").forEach(button => {
+        button.addEventListener("click", () => {
+          filtersContainer.querySelectorAll(".filter-btn").forEach(btn => btn.classList.remove("active"));
+          button.classList.add("active");
+          selectedCategory = button.dataset.category;
+          renderProducts();
+        });
+      });
+    }
+
+    function selectCategoryAndScroll(categoryKey) {
+      selectedCategory = categoryKey;
+
+      const filtersContainer = document.getElementById("category-filters");
+      if (filtersContainer) {
+        filtersContainer.querySelectorAll(".filter-btn").forEach(btn => {
+          const isActive = btn.dataset.category === categoryKey;
+          btn.classList.toggle("active", isActive);
+          if (isActive) {
+            filtersContainer.scrollTo({ left: btn.offsetLeft - 20, behavior: "smooth" });
+          }
+        });
+      }
+
+      renderProducts();
+
+      const shopSection = document.getElementById("shop");
+      if (shopSection) {
+        window.scrollTo({
+          top: shopSection.offsetTop - 90,
+          behavior: "smooth"
+        });
+      }
+    }
+
+    function renderProducts() {
+      const productList = document.getElementById("product-list");
+      if (!productList) return;
+
+      const filtered = products.filter(product => {
+        const matchesCategory = selectedCategory === "all" || product.diseases.includes(selectedCategory);
+        const matchesSearch = product.name.toLowerCase().includes(searchQuery) ||
+          product.desc.toLowerCase().includes(searchQuery);
+        return matchesCategory && matchesSearch;
+      });
+
+      if (filtered.length === 0) {
+        productList.innerHTML = `
+          <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px; background: var(--glass); backdrop-filter: blur(20px); border-radius: 28px; border: 1px dashed rgba(15,122,69,.3);">
+            <i class="fas fa-magnifying-glass" style="font-size: 2.5rem; color: var(--primary-medium); margin-bottom: 16px;"></i>
+            <h4 style="color: var(--primary-dark); font-size: 1.25rem; margin-bottom: 8px; font-weight: 800;">No Medicines Found</h4>
+            <p style="color: var(--muted); font-size: 0.95rem;">We couldn't find any products matching your search or category filter.</p>
+          </div>
+        `;
+        return;
+      }
+
+      productList.innerHTML = filtered.map((product, index) => {
+        const diseaseNames = product.diseases.map(dKey => DISEASES[dKey]?.name || dKey);
+        const newTagHTML = product.isNew ? `<span class="product-tag new">New</span>` : "";
+        const primaryTagHTML = `<span class="product-tag">${product.primaryTag}</span>`;
+        const additionalTagsHTML = diseaseNames.slice(0, 2).map(dName => `<span class="product-tag secondary">${dName}</span>`).join("");
+
+        return `
+          <article class="product-card fx" style="--i:${index}">
+            <div class="product-image">
+              <img src="${product.image}" alt="${product.name}" loading="lazy">
+            </div>
+            <div class="product-info">
+              <div class="product-tags">
+                ${newTagHTML}
+                ${primaryTagHTML}
+                ${additionalTagsHTML}
+              </div>
+              <h3 class="product-title">${product.name}</h3>
+              <p class="product-desc">${product.desc}</p>
+              <div class="price-row">
+                <span class="price">${product.price}</span>
+                <span class="stock">Available</span>
+              </div>
+              <button class="btn btn-whatsapp" type="button" data-product-id="${product.id}">
+                <i class="fab fa-whatsapp"></i> Order on WhatsApp
+              </button>
+            </div>
+          </article>
+        `;
+      }).join("");
+
+      productList.querySelectorAll("[data-product-id]").forEach(button => {
+        button.addEventListener("click", () => orderProduct(button.dataset.productId));
+      });
+    }
+
+    function setupSearch() {
+      const searchInput = document.getElementById("shop-search");
+      if (!searchInput) return;
+
+      searchInput.addEventListener("input", (event) => {
+        searchQuery = event.target.value.toLowerCase().trim();
+        renderProducts();
+      });
+    }
+
+    function setupHeroSlider() {
+      const slides = Array.from(document.querySelectorAll(".landing-slide"));
+      const dots = Array.from(document.querySelectorAll(".landing-dot"));
+      let current = 0;
+      let timer;
+
+      function showSlide(index) {
+        current = index;
+        slides.forEach((slide, slideIndex) => slide.classList.toggle("active", slideIndex === current));
+        dots.forEach((dot, dotIndex) => dot.classList.toggle("active", dotIndex === current));
+      }
+
+      function start() {
+        clearInterval(timer);
+        timer = setInterval(() => showSlide((current + 1) % slides.length), 5500);
+      }
+
+      dots.forEach(dot => {
+        dot.addEventListener("click", () => {
+          showSlide(Number(dot.dataset.slide));
+          start();
+        });
+      });
+
+      start();
+    }
+
+    function setupTypewriter() {
+      const el = document.getElementById("typed-word");
+      if (!el) return;
+      const words = ["medicines.", "wellness products.", "chronic care.", "worldwide delivery.", "expert guidance."];
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        el.textContent = words[0];
+        return;
+      }
+      let w = 0, c = 0, deleting = false;
+
+      function tick() {
+        const word = words[w];
+        if (!deleting) {
+          c++;
+          el.textContent = word.slice(0, c);
+          if (c === word.length) {
+            deleting = true;
+            return setTimeout(tick, 1700);
+          }
+          return setTimeout(tick, 75);
+        }
+        c--;
+        el.textContent = word.slice(0, c);
+        if (c === 0) {
+          deleting = false;
+          w = (w + 1) % words.length;
+          return setTimeout(tick, 380);
+        }
+        setTimeout(tick, 35);
+      }
+      tick();
+    }
+
+    function setupForms() {
+      document.getElementById("appointmentForm").addEventListener("submit", event => {
+        event.preventDefault();
+        const name = document.getElementById("apptName").value.trim();
+        const phone = document.getElementById("apptPhone").value.trim();
+        const service = document.getElementById("apptService").value;
+        const date = document.getElementById("apptDate").value;
+        const notes = document.getElementById("apptMessage").value.trim();
+        const message = [
+          "Hello VINZ Health Hub, I would like to book an appointment.",
+          "",
+          `Name: ${name}`,
+          `Phone: ${phone}`,
+          `Service: ${service}`,
+          `Preferred date: ${date}`,
+          `Notes: ${notes || "No extra notes"}`,
+          "",
+          "Please confirm the available time."
+        ].join("\n");
+        window.open(buildWhatsAppLink(message), "_blank");
+        event.target.reset();
+      });
+
+      document.getElementById("contactForm").addEventListener("submit", event => {
+        event.preventDefault();
+        const name = document.getElementById("contactName").value.trim();
+        const phone = document.getElementById("contactPhone").value.trim();
+        const msg = document.getElementById("contactMsg").value.trim();
+        const message = [
+          "Hello VINZ Health Hub, I have an inquiry from the website.",
+          "",
+          `Name: ${name}`,
+          `Phone: ${phone}`,
+          `Message: ${msg}`
+        ].join("\n");
+        window.open(buildWhatsAppLink(message), "_blank");
+        event.target.reset();
+      });
+    }
+
+    function setupScrollEffects() {
+      const navLinks = Array.from(document.querySelectorAll(".nav-link:not(.nav-cta)"));
+      const sections = navLinks
+        .map(link => document.querySelector(link.getAttribute("href")))
+        .filter(Boolean);
+      const header = document.getElementById("site-header");
+      const progress = document.getElementById("scroll-progress");
+      const hero = document.querySelector(".hero");
+      let ticking = false;
+
+      function update() {
+        const y = window.scrollY;
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        header.classList.toggle("scrolled", y > 10);
+        progress.style.transform = `scaleX(${max > 0 ? y / max : 0})`;
+        if (hero && y < window.innerHeight) {
+          hero.style.setProperty("--py", `${Math.round(y * 0.18)}px`);
+        }
+
+        let currentSection = sections[0];
+        sections.forEach(section => {
+          if (y >= section.offsetTop - 140) {
+            currentSection = section;
+          }
+        });
+        if (currentSection) {
+          navLinks.forEach(link => {
+            link.classList.toggle("active", link.getAttribute("href") === `#${currentSection.id}`);
+          });
+        }
+        ticking = false;
+      }
+
+      window.addEventListener("scroll", () => {
+        if (!ticking) {
+          requestAnimationFrame(update);
+          ticking = true;
+        }
+      }, { passive: true });
+      update();
+    }
+
+    function setupMobileMenu() {
+      const openButton = document.querySelector(".menu-toggle");
+      const closeTargets = document.querySelectorAll(".menu-close, .menu-overlay, .nav-link");
+      if (!openButton) return;
+
+      function setMenuOpen(isOpen) {
+        document.body.classList.toggle("menu-open", isOpen);
+        openButton.setAttribute("aria-expanded", String(isOpen));
+      }
+
+      openButton.addEventListener("click", () => {
+        const isOpen = document.body.classList.contains("menu-open");
+        setMenuOpen(!isOpen);
+      });
+      closeTargets.forEach(target => {
+        target.addEventListener("click", () => setMenuOpen(false));
+      });
+
+      window.addEventListener("keydown", event => {
+        if (event.key === "Escape") {
+          setMenuOpen(false);
+        }
+      });
+
+      window.addEventListener("resize", () => {
+        if (window.innerWidth >= 992) {
+          setMenuOpen(false);
+        }
+      });
+    }
+
+    /* ---------- Interactions: spotlight, 3D tilt, ripple, cursor glow ---------- */
+    function setupInteractions() {
+      const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+      const glow = document.getElementById("cursor-glow");
+
+      document.addEventListener("pointermove", event => {
+        if (glow && finePointer) {
+          glow.classList.add("on");
+          glow.style.transform = `translate3d(${event.clientX}px, ${event.clientY}px, 0)`;
+        }
+
+        const fx = event.target.closest ? event.target.closest(".fx, .disease-card") : null;
+        if (!fx) return;
+        const rect = fx.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+        fx.style.setProperty("--mx", `${x}px`);
+        fx.style.setProperty("--my", `${y}px`);
+
+        if (finePointer && fx.classList.contains("disease-card")) {
+          const rx = ((y / rect.height) - 0.5) * -7;
+          const ry = ((x / rect.width) - 0.5) * 7;
+          fx.classList.add("tilting");
+          fx.style.transform = `translateY(-8px) rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg)`;
+        }
+      });
+
+      document.addEventListener("pointerout", event => {
+        const card = event.target.closest ? event.target.closest(".disease-card") : null;
+        if (card && !card.contains(event.relatedTarget)) {
+          card.classList.remove("tilting");
+          card.style.transform = "";
+        }
+      });
+
+      document.addEventListener("pointerleave", () => glow && glow.classList.remove("on"));
+
+      document.addEventListener("click", event => {
+        const btn = event.target.closest ? event.target.closest(".btn") : null;
+        if (!btn) return;
+        const rect = btn.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        const dot = document.createElement("span");
+        dot.className = "ripple";
+        dot.style.width = dot.style.height = `${size}px`;
+        dot.style.left = `${event.clientX - rect.left - size / 2}px`;
+        dot.style.top = `${event.clientY - rect.top - size / 2}px`;
+        btn.appendChild(dot);
+        setTimeout(() => dot.remove(), 700);
+      });
+    }
+
+    /* ---------- Staggered scroll reveal ---------- */
+    let revealObserver;
+    function observeReveals() {
+      const items = Array.from(document.querySelectorAll(".reveal:not(.in):not([data-seen])"));
+      if (!("IntersectionObserver" in window)) {
+        items.forEach(el => el.classList.add("in"));
+        return;
+      }
+      if (!revealObserver) {
+        revealObserver = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            const el = entry.target;
+            el.classList.add("in");
+            revealObserver.unobserve(el);
+            // hand control back to normal hover transitions once the entrance is done
+            setTimeout(() => {
+              el.classList.remove("reveal", "in");
+              el.style.removeProperty("--d");
+            }, 1500);
+          });
+        }, { threshold: 0.1, rootMargin: "0px 0px -40px 0px" });
+      }
+      items.forEach(el => {
+        el.dataset.seen = "1";
+        const siblings = el.parentElement ? Array.from(el.parentElement.children).filter(c => c.classList.contains("reveal")) : [];
+        const idx = Math.max(0, siblings.indexOf(el));
+        el.style.setProperty("--d", `${(idx % 4) * 110}ms`);
+        revealObserver.observe(el);
+      });
+    }
+
+    renderMarquee();
+    renderDiseases();
+    setupFilters();
+    renderProducts();
+    setupSearch();
+    setupHeroSlider();
+    setupTypewriter();
+    setupForms();
+    setupScrollEffects();
+    setupMobileMenu();
+    setupInteractions();
+    observeReveals();
+  </script>
+</body>
+
+</html>
